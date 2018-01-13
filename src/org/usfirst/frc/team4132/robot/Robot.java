@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4132.robot.subsystems.GumballSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +28,10 @@ public class Robot extends TimedRobot {
 	public static final ExampleSubsystem kExampleSubsystem
 			= new ExampleSubsystem();
 	
+	//subsystems
 	public static DriveSystem driveSystem;
+	public static GumballSystem gumballSystem;
+	
 	public static OI m_oi;
 
 	Command m_autonomousCommand;

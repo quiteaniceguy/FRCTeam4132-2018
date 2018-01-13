@@ -37,4 +37,24 @@ public class DriveSystem extends Subsystem{
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
 		robotDrive.driveCartesian(yDriveSpeed, xDriveSpeed, driveRotation);
 	}
+	
+	public void setBackLeftWheel(double speed) {
+		backLeftTalon.set(speed);
+	}
+	
+	public void setFrontLeftWheel(double speed) {
+		frontLeftTalon.set(speed);
+	}
+	
+	public void setBackRightWheel(double speed) {
+		backRightTalon.set(speed);
+	}
+	
+	public void setFrontRightWheel(double speed) {
+		frontRightTalon.set(speed);
+	}
+	
+	public void driveStraight()
+	
+	
 }
