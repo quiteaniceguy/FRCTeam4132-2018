@@ -54,7 +54,14 @@ public class DriveSystem extends Subsystem{
 		frontRightTalon.set(speed);
 	}
 	
-	public void driveStraight()
+	public void controlAllDriveWheels(double backLeftSpeed, double backRightSpeed, double frontLeftSpeed, double frontRightSpeed) {
+		setBackLeftWheel(backLeftSpeed);
+		setFrontLeftWheel(frontLeftSpeed);
+		setBackRightWheel(backRightSpeed);
+		setFrontRightWheel(frontRightSpeed);
+	}
+	
+	
 	
 	
 }
