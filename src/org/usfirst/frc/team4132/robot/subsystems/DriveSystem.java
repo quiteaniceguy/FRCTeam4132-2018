@@ -5,6 +5,7 @@ import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class DriveSystem extends Subsystem{
@@ -13,7 +14,7 @@ public class DriveSystem extends Subsystem{
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
 	
-	private MecanumDrive robotDrive;
+	private DifferentialDrive robotDrive;
 	
 
 	
@@ -23,7 +24,7 @@ public class DriveSystem extends Subsystem{
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
 		backRightTalon = new Talon(RobotMap.backRightMotor);
 	
-		robotDrive = new MecanumDrive(frontLeftTalon, frontRightTalon, backLeftTalon, backRightTalon);
+		robotDrive = new DifferentialDrive(frontLeftTalon, frontRightTalon);
 		
 		
 	}
@@ -35,7 +36,8 @@ public class DriveSystem extends Subsystem{
 	}
 	
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
-		robotDrive.driveCartesian(yDriveSpeed, xDriveSpeed, driveRotation);
+		robotDrive.arcadeDrive(yDriveSpeed, xDriveSpeed);
+		
 	}
 	
 	public void setBackLeftWheel(double speed) {
