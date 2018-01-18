@@ -10,6 +10,7 @@ package org.usfirst.frc.team4132.robot;
 import org.usfirst.frc.team4132.robot.commands.SpinGumball;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -46,11 +47,11 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	public static Joystick stickOne;
+	public static XboxController stickOne;
 	public static JoystickButton buttonOne;
 	
 	public OI(){
-		stickOne = new Joystick(0);
+		stickOne = new XboxController(0);
 		buttonOne = new JoystickButton(stickOne, 1);
 		
 		buttonOne.whenPressed(new SpinGumball());
