@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		driveSystem = new DriveSystem();
+		gumballSystem = new GumballSystem();
 	}
 
 	/**

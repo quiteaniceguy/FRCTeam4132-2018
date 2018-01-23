@@ -20,7 +20,11 @@ public class DriveSystem extends Subsystem{
 	
 	public DriveSystem(){
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
+		frontLeftTalon.setInverted(false);
+		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
+		frontRightTalon.setInverted(true);
+		
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
 		backRightTalon = new Talon(RobotMap.backRightMotor);
 	
@@ -36,8 +40,9 @@ public class DriveSystem extends Subsystem{
 	}
 	
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
-		robotDrive.arcadeDrive(yDriveSpeed, xDriveSpeed);
-		
+		//why multiply? idk
+		robotDrive.arcadeDrive(yDriveSpeed , xDriveSpeed);
+		System.out.println("yDriveSpeed: " + yDriveSpeed);
 	}
 	
 	public void setBackLeftWheel(double speed) {
