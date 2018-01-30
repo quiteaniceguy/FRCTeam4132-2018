@@ -3,10 +3,12 @@ package org.usfirst.frc.team4132.robot.subsystems;
 import org.usfirst.frc.team4132.robot.RobotMap;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class DriveSystem extends Subsystem{
 	private Talon frontLeftTalon;
@@ -15,6 +17,11 @@ public class DriveSystem extends Subsystem{
 	private Talon backRightTalon;
 	
 	private DifferentialDrive robotDrive;
+	private DifferentialDrive robotDriveTwo;
+	
+	
+	/*may need to change dependencies to make this work */
+	AHRS ahrs;
 	
 
 	
@@ -23,13 +30,15 @@ public class DriveSystem extends Subsystem{
 		frontLeftTalon.setInverted(false);
 		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
-		frontRightTalon.setInverted(true);
-		
+		frontRightTalon.setInverted(false);
+
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
 		backRightTalon = new Talon(RobotMap.backRightMotor);
-	
-		robotDrive = new DifferentialDrive(frontLeftTalon, frontRightTalon);
 		
+		SpeedControllerGroup left = new SpeedControllerGroup(frontLeftTalon, backLeftTalon);
+		SpeedControllerGroup right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
+		
+		robotDrive = new DifferentialDrive(left, right);
 		
 	}
 	
@@ -41,8 +50,10 @@ public class DriveSystem extends Subsystem{
 	
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
 		//why multiply? idk
-		robotDrive.arcadeDrive(yDriveSpeed , xDriveSpeed);
+		robotDrive.arcadeDrive(-xDriveSpeed , yDriveSpeed);
 		System.out.println("yDriveSpeed: " + yDriveSpeed);
+		System.out.println("xDriveSpeed: " + xDriveSpeed);
+		System.out.println("driveRotation: " + driveRotation);
 	}
 	
 	public void setBackLeftWheel(double speed) {
