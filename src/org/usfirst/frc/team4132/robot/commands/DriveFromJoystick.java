@@ -6,6 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveFromJoystick extends Command{
 	
+	private int invert = -1;
+	private double oldInput = 0;
+	private double newInput = 0;
+	private double maxChange = 0.0125;
+	
 	public DriveFromJoystick(){
 		super("DriveFromJoystick");
 		requires(Robot.driveSystem);
@@ -17,11 +22,23 @@ public class DriveFromJoystick extends Command{
 	}
 	
 	public void execute(){
-		double yMovement = Robot.m_oi.stickOne.getRawAxis(0);
-		double xMovement = Robot.m_oi.stickOne.getRawAxis(1);
+		newInput = Robot.m_oi.stickOne.getRawAxis(0);
+		double yMovement;
+		if(newInput-oldInput > maxChange) {
+			yMovement = oldInput + maxChange;
+			oldInput = yMovement;
+		}
+		else {
+			yMovement = newInput;
+			oldInput = newInput;
+		}
+		double xMovement = invert * Robot.m_oi.stickOne.getRawAxis(1);
 		double movementRotation = Robot.m_oi.stickOne.getRawAxis(2);
 		
 		Robot.driveSystem.drive(yMovement, xMovement, movementRotation);
+		
+		
+		//System.out.println("getting the angle: " + Robot.ahrs.getAngle());
 	}
 
 }

@@ -1,9 +1,8 @@
 package org.usfirst.frc.team4132.robot.subsystems;
 
+import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.RobotMap;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
-
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSystem extends Subsystem{
+	final double ARCADE_DRIVE_SPEED = 1;
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
 	private Talon backLeftTalon;
@@ -21,24 +21,27 @@ public class DriveSystem extends Subsystem{
 	
 	
 	/*may need to change dependencies to make this work */
-	AHRS ahrs;
 	
 
 	
 	public DriveSystem(){
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
-		frontLeftTalon.setInverted(false);
+		
 		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
-		frontRightTalon.setInverted(false);
+		frontRightTalon.setInverted(true);
 
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
+		backLeftTalon.setInverted(true);
+		
 		backRightTalon = new Talon(RobotMap.backRightMotor);
+		
 		
 		SpeedControllerGroup left = new SpeedControllerGroup(frontLeftTalon, backLeftTalon);
 		SpeedControllerGroup right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
 		
 		robotDrive = new DifferentialDrive(left, right);
+		
 		
 	}
 	
@@ -50,10 +53,49 @@ public class DriveSystem extends Subsystem{
 	
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
 		//why multiply? idk
-		robotDrive.arcadeDrive(-xDriveSpeed , yDriveSpeed);
+		
+		robotDrive.arcadeDrive(yDriveSpeed * ARCADE_DRIVE_SPEED, xDriveSpeed * ARCADE_DRIVE_SPEED);
+		/*
 		System.out.println("yDriveSpeed: " + yDriveSpeed);
 		System.out.println("xDriveSpeed: " + xDriveSpeed);
 		System.out.println("driveRotation: " + driveRotation);
+		*/
+		
+		////lighting up 3
+		
+		/*     this is horrible stuff
+		if(Robot.m_oi.stickOne.getRawButton(4)) {
+			
+			frontRightTalon.set(1);
+			System.out.println("button 4");
+		}else {
+			frontRightTalon.set(0);
+		}
+		
+		if(Robot.m_oi.stickOne.getRawButton(1)) {
+			
+			backRightTalon.set(1);
+			System.out.println("button 1");
+		}else {
+			backRightTalon.set(0);
+		}
+		
+		if(Robot.m_oi.stickOne.getRawButton(2)) {
+		
+			frontLeftTalon.set(1);
+			System.out.println("button 2");
+		}else {
+			frontLeftTalon.set(0);
+		}
+		
+		if(Robot.m_oi.stickOne.getRawButton(3)) {
+			backLeftTalon.set(1);
+			System.out.println("button 3");
+		}else {
+			backLeftTalon.set(0);
+		}
+		*/
+		
 	}
 	
 	public void setBackLeftWheel(double speed) {

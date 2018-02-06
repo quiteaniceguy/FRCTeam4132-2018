@@ -50,10 +50,13 @@ public class OI {
 	public static XboxController stickOne;
 	public static JoystickButton buttonOne;
 	
+	
 	public OI(){
 		stickOne = new XboxController(0);
 		buttonOne = new JoystickButton(stickOne, 1);
 		
-		buttonOne.whenPressed(new SpinGumball());
+		//buttonOne.whenPressed(new SpinGumball());
 	}
+	
+	
 }

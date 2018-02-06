@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4132.robot;
 
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -17,7 +18,12 @@ import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team4132.robot.subsystems.GumballSystem;
+import org.usfirst.frc.team4132.robot.subsystems.GrabberSystem;
+
+//import com.kauailabs.navx.frc.AHRS;
+
+//import com.kauailabs.navx.frc.AHRS;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,8 +38,8 @@ public class Robot extends TimedRobot {
 	
 	//subsystems
 	public static DriveSystem driveSystem;
-	public static GumballSystem gumballSystem;
-	
+	public static GrabberSystem grabberSystem;
+	//public static AHRS ahrs;
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
@@ -51,7 +57,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		driveSystem = new DriveSystem();
-		gumballSystem = new GumballSystem();
+		grabberSystem = new GrabberSystem();
+		
+		//ahrs = new AHRS(SerialPort.Port.kOnboard);
+		
 	}
 
 	/**
