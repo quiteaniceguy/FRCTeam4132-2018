@@ -23,9 +23,13 @@ public class DriveFromJoystick extends Command{
 	
 	public void execute(){
 		newInput = Robot.m_oi.stickOne.getRawAxis(0);
-		double yMovement;
-		if(newInput-oldInput > maxChange) {
+		double yMovement = 0;
+		if(Math.abs(newInput-oldInput) > maxChange && newInput > oldInput) {
 			yMovement = oldInput + maxChange;
+			oldInput = yMovement;
+		}
+		else if(Math.abs(newInput-oldInput) > maxChange && newInput < oldInput) {
+			yMovement = oldInput - maxChange;
 			oldInput = yMovement;
 		}
 		else {

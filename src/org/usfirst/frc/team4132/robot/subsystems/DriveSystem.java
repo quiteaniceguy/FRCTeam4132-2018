@@ -26,10 +26,11 @@ public class DriveSystem extends Subsystem{
 	
 	public DriveSystem(){
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
+		frontLeftTalon.setInverted(true);
 		
 		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
-		frontRightTalon.setInverted(true);
+		frontRightTalon.setInverted(false);
 
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
 		backLeftTalon.setInverted(true);
