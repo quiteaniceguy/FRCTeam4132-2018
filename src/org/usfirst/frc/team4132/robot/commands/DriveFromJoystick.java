@@ -23,7 +23,10 @@ public class DriveFromJoystick extends Command{
 	
 	public void execute(){
 		newInput = Robot.m_oi.stickOne.getRawAxis(0);
+		
 		double yMovement = 0;
+		
+		/* this is all garbage
 		if(Math.abs(newInput-oldInput) > maxChange && newInput > oldInput) {
 			yMovement = oldInput + maxChange;
 			oldInput = yMovement;
@@ -36,11 +39,13 @@ public class DriveFromJoystick extends Command{
 			yMovement = newInput;
 			oldInput = newInput;
 		}
+		*/
+		
+		yMovement = newInput;
 		double xMovement = invert * Robot.m_oi.stickOne.getRawAxis(1);
 		double movementRotation = Robot.m_oi.stickOne.getRawAxis(2);
 		
 		Robot.driveSystem.drive(yMovement, xMovement, movementRotation);
-		
 		
 		//System.out.println("getting the angle: " + Robot.ahrs.getAngle());
 	}

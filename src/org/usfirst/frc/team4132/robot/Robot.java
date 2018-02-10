@@ -19,6 +19,7 @@ import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4132.robot.subsystems.GrabberSystem;
+import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 
 //import com.kauailabs.navx.frc.AHRS;
 
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	//subsystems
 	public static DriveSystem driveSystem;
 	public static GrabberSystem grabberSystem;
+	public static LifterSystem lifterSystem;
 	//public static AHRS ahrs;
 	public static OI m_oi;
 
@@ -58,6 +60,7 @@ public class Robot extends TimedRobot {
 		
 		driveSystem = new DriveSystem();
 		grabberSystem = new GrabberSystem();
+		lifterSystem = new LifterSystem();
 		
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		

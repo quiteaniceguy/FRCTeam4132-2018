@@ -48,12 +48,14 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	public static XboxController stickOne;
-	public static JoystickButton buttonOne;
+	public static JoystickButton button_a;
+	
+
 	
 	
 	public OI(){
 		stickOne = new XboxController(0);
-		buttonOne = new JoystickButton(stickOne, 1);
+		button_a = new JoystickButton(stickOne, XboxControllerMap.A);
 		
 		//buttonOne.whenPressed(new SpinGumball());
 	}
