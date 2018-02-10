@@ -4,6 +4,7 @@ import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.RobotMap;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,6 +17,9 @@ public class DriveSystem extends Subsystem{
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
 	
+	public Encoder rightEncoder;
+	public Encoder leftEncoder;
+	
 	private DifferentialDrive robotDrive;
 	private DifferentialDrive robotDriveTwo;
 	
@@ -25,6 +29,7 @@ public class DriveSystem extends Subsystem{
 
 	
 	public DriveSystem(){
+		/*  motors  */
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
 		frontLeftTalon.setInverted(true);
 		
@@ -42,6 +47,13 @@ public class DriveSystem extends Subsystem{
 		SpeedControllerGroup right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
 		
 		robotDrive = new DifferentialDrive(left, right);
+		
+		/*  sensors */
+		
+		rightEncoder = new Encoder(RobotMap.rightEncoderOne, RobotMap.rightEncoderTwo);
+		leftEncoder = new Encoder(RobotMap.leftEncoderOne, RobotMap.leftEncoderTwo);
+		
+	
 		
 		
 	}
@@ -120,6 +132,11 @@ public class DriveSystem extends Subsystem{
 		setFrontLeftWheel(frontLeftSpeed);
 		setBackRightWheel(backRightSpeed);
 		setFrontRightWheel(frontRightSpeed);
+	}
+	
+	public void zeroEncoders() {
+		rightEncoder.reset();
+		leftEncoder.reset();
 	}
 	
 	
