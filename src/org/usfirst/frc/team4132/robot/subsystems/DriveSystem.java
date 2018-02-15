@@ -35,10 +35,10 @@ public class DriveSystem extends Subsystem{
 		
 		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
-		frontRightTalon.setInverted(false);
+		frontRightTalon.setInverted(true);
 
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
-		backLeftTalon.setInverted(true);
+		
 		
 		backRightTalon = new Talon(RobotMap.backRightMotor);
 		
@@ -47,6 +47,8 @@ public class DriveSystem extends Subsystem{
 		SpeedControllerGroup right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
 		
 		robotDrive = new DifferentialDrive(left, right);
+		
+		
 		
 		/*  sensors */
 		
@@ -67,7 +69,13 @@ public class DriveSystem extends Subsystem{
 	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
 		//why multiply? idk
 		
+		
 		robotDrive.arcadeDrive(yDriveSpeed * ARCADE_DRIVE_SPEED, xDriveSpeed * ARCADE_DRIVE_SPEED);
+		/*
+		System.out.println("Right encoder count: " + rightEncoder.get());
+		System.out.println("Left encoder count: " + leftEncoder.get());
+		*/
+		 
 		/*
 		System.out.println("yDriveSpeed: " + yDriveSpeed);
 		System.out.println("xDriveSpeed: " + xDriveSpeed);

@@ -4,6 +4,7 @@ import org.usfirst.frc.team4132.robot.RobotMap;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.UseGrabber;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,8 +12,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class GrabberSystem extends Subsystem{
 	
-	Talon leftGrabber;
-	Talon rightGrabber;
+	public Talon leftGrabber;
+	public Talon rightGrabber;
 	SpeedControllerGroup grabber;
 	
 	public GrabberSystem(){

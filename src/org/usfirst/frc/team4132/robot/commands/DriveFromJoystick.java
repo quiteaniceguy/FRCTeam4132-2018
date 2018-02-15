@@ -1,11 +1,12 @@
 package org.usfirst.frc.team4132.robot.commands;
 
 import org.usfirst.frc.team4132.robot.Robot;
+import org.usfirst.frc.team4132.robot.XboxControllerMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveFromJoystick extends Command{
-	
+	private final double DRIVE_SPEED = .6d;
 	private int invert = -1;
 	private double oldInput = 0;
 	private double newInput = 0;
@@ -22,7 +23,7 @@ public class DriveFromJoystick extends Command{
 	}
 	
 	public void execute(){
-		newInput = Robot.m_oi.stickOne.getRawAxis(0);
+		newInput = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_Y);
 		
 		double yMovement = 0;
 		
@@ -41,8 +42,8 @@ public class DriveFromJoystick extends Command{
 		}
 		*/
 		
-		yMovement = newInput;
-		double xMovement = invert * Robot.m_oi.stickOne.getRawAxis(1);
+		yMovement = newInput * DRIVE_SPEED;
+		double xMovement = invert * Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_X) * DRIVE_SPEED;
 		double movementRotation = Robot.m_oi.stickOne.getRawAxis(2);
 		
 		Robot.driveSystem.drive(yMovement, xMovement, movementRotation);

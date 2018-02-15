@@ -7,16 +7,26 @@
 
 package org.usfirst.frc.team4132.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team4132.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.
  */
 public class ExampleCommand extends Command {
+	NetworkTable table;
+	int i = 0;
 	public ExampleCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.kExampleSubsystem);
+		requires(Robot.exampleSubsystem);
+		NetworkTableInstance networkTable = NetworkTableInstance.getDefault();
+		table = networkTable.getTable("testDatatable");
+		
+	
+		
 	}
 
 	// Called just before this Command runs the first time
@@ -28,7 +38,9 @@ public class ExampleCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		
+		System.out.println("test test test: " + table.getEntry("robotTime").getNumber(0) );
+		i++;
+		//table.getEntry("robotTime").setNumber(i);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

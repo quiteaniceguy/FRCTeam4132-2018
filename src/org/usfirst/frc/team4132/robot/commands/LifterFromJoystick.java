@@ -6,8 +6,8 @@ import org.usfirst.frc.team4132.robot.XboxControllerMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LifterFromJoystick extends Command{
-	private double lifterLowerSpeed = - 0.8d;
-	private double lifterRaiseSpeed = .8d;
+	private double lifterLowerSpeed = - 0.4d;
+	private double lifterRaiseSpeed = 1d;
 	
 	public LifterFromJoystick() {
 		super("LifterFromJoystick");

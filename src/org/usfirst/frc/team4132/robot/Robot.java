@@ -34,7 +34,7 @@ import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem
+	public static final ExampleSubsystem exampleSubsystem
 			= new ExampleSubsystem();
 	
 	//subsystems
