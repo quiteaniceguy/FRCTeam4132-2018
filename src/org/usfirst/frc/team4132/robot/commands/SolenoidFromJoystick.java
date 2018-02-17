@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4132.robot.commands;
 
 import org.usfirst.frc.team4132.robot.Robot;
+import org.usfirst.frc.team4132.robot.XboxControllerMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -26,15 +27,15 @@ public class SolenoidFromJoystick extends Command{
 		switch(shooterSolenoidState) {
 			case IN:
 				Robot.pneumaticSystem.solenoidIn();
-				if(!Robot.m_oi.stickOne.getRawButton(0)) {
+				if(!Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTIN;
 				}
 				
 				break;
 				
 			case DORMANTIN:
-				
-				if(Robot.m_oi.stickOne.getRawButton(0)) {
+				Robot.pneumaticSystem.solenoidIn();
+				if(Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
 					shooterSolenoidState = ShooterSolenoidStates.OUT;
 				}
 				
@@ -42,16 +43,16 @@ public class SolenoidFromJoystick extends Command{
 				
 			case OUT:
 				Robot.pneumaticSystem.solenoidOut();
-				if(!Robot.m_oi.stickOne.getRawButton(0)) {
+				if(!Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTOUT;
 				}
 				
 				break;
 				
 			case DORMANTOUT:
-				
-				if(Robot.m_oi.stickOne.getRawButton(0)) {
-					shooterSolenoidState = ShooterSolenoidStates.DORMANTOUT;
+				Robot.pneumaticSystem.solenoidOut();
+				if(Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
+					shooterSolenoidState = ShooterSolenoidStates.IN;
 				}
 				
 				break;
