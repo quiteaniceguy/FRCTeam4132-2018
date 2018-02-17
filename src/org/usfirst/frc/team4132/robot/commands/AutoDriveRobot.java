@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoDriveRobot extends Command{
 	private double backLeftSpeed, backRightSpeed, frontRightSpeed, frontLeftSpeed;
-	
+	///test comment to test auto
 	public AutoDriveRobot(double backLeftSpeed, double backRightSpeed, double frontRightSpeed, double frontLeftSpeed, double time) {
 		
 		super("AutoDriveRobot");
