@@ -24,10 +24,11 @@ public class SolenoidFromJoystick extends Command{
 	}
 	
 	public void execute() {
+		boolean XboxYButton = Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y);
 		switch(shooterSolenoidState) {
 			case IN:
 				Robot.pneumaticSystem.solenoidIn();
-				if(!Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
+				if(!XboxYButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTIN;
 				}
 				
@@ -35,7 +36,7 @@ public class SolenoidFromJoystick extends Command{
 				
 			case DORMANTIN:
 				Robot.pneumaticSystem.solenoidIn();
-				if(Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
+				if(XboxYButton) {
 					shooterSolenoidState = ShooterSolenoidStates.OUT;
 				}
 				
@@ -43,7 +44,7 @@ public class SolenoidFromJoystick extends Command{
 				
 			case OUT:
 				Robot.pneumaticSystem.solenoidOut();
-				if(!Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
+				if(!XboxYButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTOUT;
 				}
 				
@@ -51,7 +52,7 @@ public class SolenoidFromJoystick extends Command{
 				
 			case DORMANTOUT:
 				Robot.pneumaticSystem.solenoidOut();
-				if(Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y)) {
+				if(XboxYButton) {
 					shooterSolenoidState = ShooterSolenoidStates.IN;
 				}
 				
