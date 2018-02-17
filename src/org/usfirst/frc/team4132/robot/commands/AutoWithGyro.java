@@ -23,6 +23,7 @@ public class AutoWithGyro extends Command{
 	 * turns robot with speed 'speed'(positive is clockwise) for degrees 'degrees'
 	 */
 	public void turn(double speed, double degrees) {
+		
 		double rotateDir = degrees/Math.abs(degrees);
 		int reverse = -1;
 		double currentDegree = 0;
