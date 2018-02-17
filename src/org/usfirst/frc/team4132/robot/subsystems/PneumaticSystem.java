@@ -29,5 +29,6 @@ public class PneumaticSystem extends Subsystem{
 	public void solenoidOff() {
 		lifterSolenoid.set(DoubleSolenoid.Value.kOff);
 	}
+	
 
 }
