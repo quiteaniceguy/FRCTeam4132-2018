@@ -26,19 +26,20 @@ public class AutoWithGyro extends Command{
 		
 		double rotateDir = degrees/Math.abs(degrees);
 		int reverse = -1;
-		double currentDegree = 0;
+		double deltaDegree = 0;
 		
 		/* reverse right wheels when going in positive direction WHILE less than degrees to turn(must still write this part)*/
-		while( Math.abs(currentDegree) < Math.abs(degrees) ) {
+		while( Math.abs(deltaDegree) < Math.abs(degrees) ) {
 			Robot.driveSystem.controlAllDriveWheels(speed * rotateDir, speed * rotateDir * reverse, speed * rotateDir, speed * rotateDir * reverse);
 		}
 	}
 	
-	public void linearMovement(double speed, double distance) {
+	/* magnitude must be positive */
+	public void linearMovement(double speed, double magnitude) {
 		
 		double roboDistance;
 		/* move all wheels at this speed for this amount of direction  */
-		while( Math.abs((roboDistance = Robot.piComSystem.getPosData()[0])) < Math.abs(distance) ) {
+		while( Math.abs((roboDistance = Robot.piComSystem.getPosData()[0])) < Math.abs(magnitude) ) {
 			Robot.driveSystem.controlAllDriveWheels(speed, speed, speed, speed);
 		}
 		

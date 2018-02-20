@@ -18,8 +18,8 @@ import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team4132.robot.subsystems.GrabberSystem;
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
+import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticSystem;
 
 //import com.kauailabs.navx.frc.AHRS;
@@ -40,9 +40,9 @@ public class Robot extends TimedRobot {
 	
 	//subsystems
 	public static DriveSystem driveSystem;
-	public static GrabberSystem grabberSystem;
 	public static LifterSystem lifterSystem;
 	public static PneumaticSystem pneumaticSystem;
+	public static PiComSystem piComSystem;
 	//public static AHRS ahrs;
 	public static OI m_oi;
 
@@ -60,10 +60,11 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
+		/*  subsystems  */
 		driveSystem = new DriveSystem();
-		grabberSystem = new GrabberSystem();
 		lifterSystem = new LifterSystem();
 		pneumaticSystem = new PneumaticSystem();
+		piComSystem = new PiComSystem();
 		
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		
