@@ -24,17 +24,17 @@ public class PiComSystem extends Subsystem{
 	/*
 	 * Returns array of gyroscope data
 	 */
-	public double[] getGyroData() {
-		
-		return null;
+	public double getGyroData() {
+		double angle = 0;
+		return angle;
 	}
 	
 	/*
 	 * Returns array of phone position
 	 */
 	public double[] getPosData() {
-		
-		return null;
+		double[] position = new double[2];
+		return position;
 	}
 	
 	
