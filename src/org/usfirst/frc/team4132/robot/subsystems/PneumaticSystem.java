@@ -1,23 +1,25 @@
 package org.usfirst.frc.team4132.robot.subsystems;
 
 import org.usfirst.frc.team4132.robot.RobotMap;
-import org.usfirst.frc.team4132.robot.commands.SolenoidFromJoystick;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class PneumaticSystem extends Subsystem{
 	
 	DoubleSolenoid lifterSolenoid;
+	Command defaultCommand;
 	
-	public PneumaticSystem() {
-		lifterSolenoid  = new DoubleSolenoid(RobotMap.lifterSolenoidOne, RobotMap.lifterSolenoidTwo);
+	public PneumaticSystem(int portOne, int portTwo, Command defaultCommand) {
+		lifterSolenoid  = new DoubleSolenoid(portOne, portTwo);
+		this.defaultCommand = defaultCommand;
 	}
 	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		setDefaultCommand(new SolenoidFromJoystick());
+		setDefaultCommand(defaultCommand);
 	}
 	
 	public void solenoidIn() {
@@ -31,5 +33,4 @@ public class PneumaticSystem extends Subsystem{
 	public void solenoidOff() {
 		lifterSolenoid.set(DoubleSolenoid.Value.kOff);
 	}
-
 }

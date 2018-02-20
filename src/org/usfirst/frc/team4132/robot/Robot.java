@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
+import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
@@ -40,7 +42,8 @@ public class Robot extends TimedRobot {
 	//subsystems
 	public static DriveSystem driveSystem;
 	public static LifterSystem lifterSystem;
-	public static PneumaticSystem pneumaticSystem;
+	public static PneumaticSystem pneumaticGrabberSystem;
+	public static PneumaticSystem pneumaticGearSystem;
 	//public static AHRS ahrs;
 	public static OI m_oi;
 
@@ -60,8 +63,8 @@ public class Robot extends TimedRobot {
 		
 		driveSystem = new DriveSystem();
 		lifterSystem = new LifterSystem();
-		pneumaticSystem = new PneumaticSystem();
-		
+		//pneumaticGrabberSystem = new PneumaticSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
+		pneumaticGearSystem = new PneumaticSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo, new SolenoidGearFromJoystick());
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		
 	}
