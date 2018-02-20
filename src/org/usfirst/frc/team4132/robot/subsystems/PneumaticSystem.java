@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4132.robot.subsystems;
 
 import org.usfirst.frc.team4132.robot.RobotMap;
+import org.usfirst.frc.team4132.robot.commands.SolenoidFromJoystick;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,6 +17,7 @@ public class PneumaticSystem extends Subsystem{
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+		setDefaultCommand(new SolenoidFromJoystick());
 	}
 	
 	public void solenoidIn() {

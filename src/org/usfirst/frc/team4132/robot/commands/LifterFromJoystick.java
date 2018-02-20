@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class LifterFromJoystick extends Command{
 	private double lifterLowerSpeed = - 0.4d;
-	private double lifterRaiseSpeed = 1d;
+	private double lifterRaiseSpeed = .7d;
 	
 	public LifterFromJoystick() {
 		super("LifterFromJoystick");

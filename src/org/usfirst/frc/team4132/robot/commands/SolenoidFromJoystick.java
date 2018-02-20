@@ -58,6 +58,7 @@ public class SolenoidFromJoystick extends Command{
 				
 				break;
 		}
+		System.out.println(shooterSolenoidState);
 	}
 
 }
