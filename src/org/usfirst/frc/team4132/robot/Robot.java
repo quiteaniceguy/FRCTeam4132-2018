@@ -63,8 +63,8 @@ public class Robot extends TimedRobot {
 		
 		driveSystem = new DriveSystem();
 		lifterSystem = new LifterSystem();
-		//pneumaticGrabberSystem = new PneumaticSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
-		pneumaticGearSystem = new PneumaticSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo, new SolenoidGearFromJoystick());
+		pneumaticGrabberSystem = new PneumaticSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo, "grabber");
+		pneumaticGearSystem = new PneumaticSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo, "gearShift");
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		
 	}
