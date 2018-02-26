@@ -38,8 +38,7 @@ public class ExampleCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		System.out.println("test test test: " + table.getEntry("robotTime").getNumber(0) );
-		i++;
+		
 		//table.getEntry("robotTime").setNumber(i);
 	}
 

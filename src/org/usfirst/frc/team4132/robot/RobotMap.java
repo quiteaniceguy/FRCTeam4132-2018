@@ -34,9 +34,11 @@ public class RobotMap {
 	 * 
 	 * 
 	 */
-	public static int frontRightMotor = 2, frontLeftMotor = 3, backRightMotor = 0, backLeftMotor = 1, armLifter = 5;
+
+	public static int frontRightMotor = 2, frontLeftMotor = 3, backRightMotor = 0, backLeftMotor = 5, armLifter = 1;
 	public static int rightEncoderOne = 0, rightEncoderTwo = 1, leftEncoderOne = 2, leftEncoderTwo = 3;
-	public static int lifterSolenoidOne = 0, lifterSolenoidTwo = 1, switchSolenoidOne = 2, switchSolenoid = 3; 
+	public static int grabberSolenoidOne = 0, grabberSolenoidTwo = 1, gearSolenoidOne = 2, gearSolenoidTwo = 3; 
+
 	
 }
 

@@ -2,62 +2,60 @@ package org.usfirst.frc.team4132.robot.commands;
 
 import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.XboxControllerMap;
+import org.usfirst.frc.team4132.robot.subsystems.PneumaticSystem;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class SolenoidFromJoystick extends Command{
+public class PneumaticController {
 	
 	enum ShooterSolenoidStates{
 		IN, OUT, DORMANTIN, DORMANTOUT;
 	}
 	
-	ShooterSolenoidStates shooterSolenoidState;
+	private ShooterSolenoidStates shooterSolenoidState;
+	private int button;
+	PneumaticSystem pneumaticSystem;
 	
-	public SolenoidFromJoystick() {
-		requires(Robot.pneumaticSystem);
+	public PneumaticController(int button, PneumaticSystem pneumaticSystem) {
 		shooterSolenoidState = ShooterSolenoidStates.IN;
-	}
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		this.pneumaticSystem = pneumaticSystem;
+		this.button = button;
+		
 	}
 	
-	public void execute() {
-		boolean XboxYButton = Robot.m_oi.stickOne.getRawButton(XboxControllerMap.Y);
+	public void run() {
+		boolean XboxButton = Robot.m_oi.stickOne.getRawButton(button);
 		switch(shooterSolenoidState) {
 			case IN:
-				Robot.pneumaticSystem.solenoidIn();
-				if(!XboxYButton) {
+				pneumaticSystem.solenoidIn();
+				if(!XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTIN;
 				}
 				
 				break;
 				
 			case DORMANTIN:
-				Robot.pneumaticSystem.solenoidIn();
-				if(XboxYButton) {
+				pneumaticSystem.solenoidIn();
+				if(XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.OUT;
 				}
 				
 				break;
 				
 			case OUT:
-				Robot.pneumaticSystem.solenoidOut();
-				if(!XboxYButton) {
+				pneumaticSystem.solenoidOut();
+				if(!XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTOUT;
 				}
 				
 				break;
 				
 			case DORMANTOUT:
-				Robot.pneumaticSystem.solenoidOut();
-				if(XboxYButton) {
+				pneumaticSystem.solenoidOut();
+				if(XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.IN;
 				}
 				
 				break;
 		}
+		System.out.println(shooterSolenoidState);
 	}
-
 }
