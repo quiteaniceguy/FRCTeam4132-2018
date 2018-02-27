@@ -19,6 +19,7 @@ import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4132.robot.subsystems.EncoderSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
 
 	public static PneumaticSystem pneumaticGrabberSystem;
 	public static PneumaticSystem pneumaticGearSystem;
+	public static EncoderSystem encoderSystem;
 
 	//public static AHRS ahrs;
 	public static OI m_oi;
@@ -76,6 +78,8 @@ public class Robot extends TimedRobot {
 
 		pneumaticGrabberSystem = new PneumaticSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo, "grabber");
 		pneumaticGearSystem = new PneumaticSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo, "gearShift");
+		
+		encoderSystem = new EncoderSystem();
 
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		

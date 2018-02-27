@@ -41,7 +41,7 @@ public class AutoWithGyro extends Command{
 		
 		double roboDistance;
 		/* move all wheels at this speed for this amount of direction  */
-		while( Math.abs((roboDistance = Robot.piComSystem.getPosData()[0])) < Math.abs(magnitude) ) {
+		while( Math.abs(roboDistance = Robot.encoderSystem.encoder.getDistance()) < Math.abs(magnitude) ) {
 			double leftSpeed, rightSpeed;
 			leftSpeed = rightSpeed = speed;
 			
