@@ -5,6 +5,8 @@ import org.usfirst.frc.team4132.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoWithGyro extends Command{
+	public final double LOW_TURN_COMP = .8d;
+	public final double HIGH_TURN_COMP = 1.2d;
 	public AutoWithGyro() {
 		super("AutoWithGyro");
 		
@@ -35,12 +37,27 @@ public class AutoWithGyro extends Command{
 	}
 	
 	/* magnitude must be positive */
-	public void linearMovement(double speed, double magnitude) {
+	public void linearMovement(double speed, double magnitude, double directionToFace) {
 		
 		double roboDistance;
 		/* move all wheels at this speed for this amount of direction  */
 		while( Math.abs((roboDistance = Robot.piComSystem.getPosData()[0])) < Math.abs(magnitude) ) {
+			double leftSpeed, rightSpeed;
+			leftSpeed = rightSpeed = speed;
+			
 			Robot.driveSystem.controlAllDriveWheels(speed, speed, speed, speed);
+			if (Robot.piComSystem.getGyroData()[0] < directionToFace) {
+				
+				leftSpeed = speed * HIGH_TURN_COMP;
+				rightSpeed = speed * LOW_TURN_COMP;
+				
+			}else if(Robot.piComSystem.getGyroData()[0] > directionToFace) {
+				
+				rightSpeed = speed * HIGH_TURN_COMP;
+				leftSpeed = speed * LOW_TURN_COMP;
+				
+			}
+			Robot.driveSystem.controlAllDriveWheels(leftSpeed, rightSpeed, leftSpeed, rightSpeed);
 		}
 		
 	}
