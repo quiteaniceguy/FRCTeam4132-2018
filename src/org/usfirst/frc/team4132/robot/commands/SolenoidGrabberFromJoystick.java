@@ -11,7 +11,7 @@ public class SolenoidGrabberFromJoystick extends Command{
 	
 	public SolenoidGrabberFromJoystick() {
 		requires(Robot.pneumaticGrabberSystem);
-		pneController = new PneumaticController(XboxControllerMap.Y, Robot.pneumaticGrabberSystem);
+		pneController = new PneumaticController(XboxControllerMap.Y, Robot.pneumaticGrabberSystem.lifterSolenoid);
 	}
 	@Override
 	protected boolean isFinished() {

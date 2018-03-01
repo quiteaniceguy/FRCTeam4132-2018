@@ -23,7 +23,8 @@ import org.usfirst.frc.team4132.robot.subsystems.EncoderSystem;
 import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
-import org.usfirst.frc.team4132.robot.subsystems.PneumaticSystem;
+import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
+import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
 
 //import com.kauailabs.navx.frc.AHRS;
 
@@ -47,8 +48,8 @@ public class Robot extends TimedRobot {
 
 	public static PiComSystem piComSystem;
 
-	public static PneumaticSystem pneumaticGrabberSystem;
-	public static PneumaticSystem pneumaticGearSystem;
+	public static PneumaticGrabberSystem pneumaticGrabberSystem;
+	public static PneumaticGearSystem pneumaticGearSystem;
 	public static EncoderSystem encoderSystem;
 
 	//public static AHRS ahrs;
@@ -57,7 +58,7 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	/**
+	/*
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
@@ -66,6 +67,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		/*  subsystems  */
@@ -76,10 +78,10 @@ public class Robot extends TimedRobot {
 		piComSystem = new PiComSystem();
 		
 
-		pneumaticGrabberSystem = new PneumaticSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo, "grabber");
-		pneumaticGearSystem = new PneumaticSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo, "gearShift");
+		pneumaticGrabberSystem = new PneumaticGrabberSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
+		pneumaticGearSystem = new PneumaticGearSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo);
 		
-		encoderSystem = new EncoderSystem();
+		//encoderSystem = new EncoderSystem();
 
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		
@@ -114,7 +116,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//m_autonomousCommand = m_chooser.getSelected();
-		m_autonomousCommand = new DriveStraightAndRight();
+		//m_autonomousCommand = new DriveStraightAndRight();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -123,7 +125,7 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		// schedule the autonomous command (example)
+		 //schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -134,7 +136,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
 	}
 
 	@Override

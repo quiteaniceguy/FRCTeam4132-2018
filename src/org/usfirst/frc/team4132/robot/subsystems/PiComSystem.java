@@ -30,8 +30,7 @@ public class PiComSystem extends Subsystem{
 	}
 	
 	/*
-<<<<<<< HEAD
-=======
+
 	 * Returns array of phone position
 	 */
 	public double[] getPosData() {
@@ -46,7 +45,7 @@ public class PiComSystem extends Subsystem{
 	 */
 	public int getPiTime() {
 		
-		return (int) table.getEntry("robotTime").getNumber(0);
+		return (int) 1/*table.getEntry("robotTime").getNumber(0)*/;
 		
 	}
 	

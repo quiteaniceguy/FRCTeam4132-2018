@@ -2,7 +2,8 @@ package org.usfirst.frc.team4132.robot.commands;
 
 import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.XboxControllerMap;
-import org.usfirst.frc.team4132.robot.subsystems.PneumaticSystem;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class PneumaticController {
 	
@@ -12,9 +13,9 @@ public class PneumaticController {
 	
 	private ShooterSolenoidStates shooterSolenoidState;
 	private int button;
-	PneumaticSystem pneumaticSystem;
+	DoubleSolenoid pneumaticSystem;
 	
-	public PneumaticController(int button, PneumaticSystem pneumaticSystem) {
+	public PneumaticController(int button, DoubleSolenoid pneumaticSystem) {
 		shooterSolenoidState = ShooterSolenoidStates.IN;
 		this.pneumaticSystem = pneumaticSystem;
 		this.button = button;
@@ -25,7 +26,7 @@ public class PneumaticController {
 		boolean XboxButton = Robot.m_oi.stickOne.getRawButton(button);
 		switch(shooterSolenoidState) {
 			case IN:
-				pneumaticSystem.solenoidIn();
+				pneumaticSystem.set(DoubleSolenoid.Value.kReverse);
 				if(!XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTIN;
 				}
@@ -33,7 +34,7 @@ public class PneumaticController {
 				break;
 				
 			case DORMANTIN:
-				pneumaticSystem.solenoidIn();
+				pneumaticSystem.set(DoubleSolenoid.Value.kReverse);
 				if(XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.OUT;
 				}
@@ -41,7 +42,7 @@ public class PneumaticController {
 				break;
 				
 			case OUT:
-				pneumaticSystem.solenoidOut();
+				pneumaticSystem.set(DoubleSolenoid.Value.kForward);
 				if(!XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.DORMANTOUT;
 				}
@@ -49,13 +50,13 @@ public class PneumaticController {
 				break;
 				
 			case DORMANTOUT:
-				pneumaticSystem.solenoidOut();
+				pneumaticSystem.set(DoubleSolenoid.Value.kForward);
 				if(XboxButton) {
 					shooterSolenoidState = ShooterSolenoidStates.IN;
 				}
 				
 				break;
 		}
-		System.out.println(shooterSolenoidState);
+		//System.out.println(shooterSolenoidState);
 	}
 }

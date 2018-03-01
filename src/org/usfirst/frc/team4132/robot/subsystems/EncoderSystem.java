@@ -17,5 +17,9 @@ public class EncoderSystem extends Subsystem{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public double getDistance() {
+		return 1;
+	}
 
 }

@@ -11,7 +11,7 @@ public class AutoWithGyro extends Command{
 		super("AutoWithGyro");
 		
 		requires(Robot.driveSystem);
-		requires(Robot.piComSystem);
+		//requires(Robot.piComSystem);
 		
 		
 	}
@@ -46,12 +46,12 @@ public class AutoWithGyro extends Command{
 			leftSpeed = rightSpeed = speed;
 			
 			Robot.driveSystem.controlAllDriveWheels(speed, speed, speed, speed);
-			if (Robot.piComSystem.getGyroData()[0] < directionToFace) {
+			if (Robot.piComSystem.getGyroData() < directionToFace) {
 				
 				leftSpeed = speed * HIGH_TURN_COMP;
 				rightSpeed = speed * LOW_TURN_COMP;
 				
-			}else if(Robot.piComSystem.getGyroData()[0] > directionToFace) {
+			}else if(Robot.piComSystem.getGyroData() > directionToFace) {
 				
 				rightSpeed = speed * HIGH_TURN_COMP;
 				leftSpeed = speed * LOW_TURN_COMP;
