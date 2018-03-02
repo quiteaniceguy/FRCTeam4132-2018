@@ -13,10 +13,10 @@ public class DriveToPoint extends CommandGroup{
 		super("DriveToPoint");
 		
 		requires(Robot.driveSystem);
-		requires(Robot.piComSystem);
+		//requires(Robot.piComSystem);
 
-		rAngle = Robot.piComSystem.getGyroData();
-		positions = Robot.piComSystem.getPosData();
+		//rAngle = Robot.piComSystem.getGyroData();
+		//positions = Robot.piComSystem.getPosData();
 		xPos = positions[0];
 		yPos = positions[1];
 		
@@ -36,7 +36,7 @@ public class DriveToPoint extends CommandGroup{
 			else {
 				Robot.driveSystem.controlAllDriveWheels(-a, a, -a, a); //May not rotate the correct way, does not give the correct acceleration value
 			}
-			rAngle = Robot.piComSystem.getGyroData();
+			//rAngle = Robot.piComSystem.getGyroData();
 		}
 		addSequential(new AutoDriveRobot(0, 0, 0, 0, 0.1));
 		d = Math.sqrt(Math.pow(x - xPos, 2) + Math.pow(y - yPos, 2));

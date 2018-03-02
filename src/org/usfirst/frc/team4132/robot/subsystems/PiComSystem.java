@@ -21,21 +21,27 @@ public class PiComSystem extends Subsystem{
 		
 	}
 	
-	/*
-	 * Returns array of gyroscope data
-	 */
 	public double getGyroData() {
 		double angle = 0;
 		return angle;
 	}
 	
-	
+<<<<<<< HEAD
+=======
 	/*
-	 * Returns time on raspberry pi. May get rid of this, not necessary?
+
+	 * Returns array of phone position
 	 */
+	public double[] getPosData() {
+		double[] position = new double[2];
+		return position;
+	}
+	
+>>>>>>> fcd5181312f8573a93f56fca061d41ac5005d0c9
+	
 	public int getPiTime() {
 		
-		return (int) table.getEntry("robotTime").getNumber(0);
+		return (int) 1/*table.getEntry("robotTime").getNumber(0)*/;
 		
 	}
 	

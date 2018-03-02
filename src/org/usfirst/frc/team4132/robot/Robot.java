@@ -15,10 +15,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
+<<<<<<< HEAD
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
+=======
+import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
+import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
+import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team4132.robot.subsystems.EncoderSystem;
+import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
+>>>>>>> fcd5181312f8573a93f56fca061d41ac5005d0c9
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
-import org.usfirst.frc.team4132.robot.subsystems.PneumaticSystem;
+import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
+import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
 
 //import com.kauailabs.navx.frc.AHRS;
 
@@ -37,15 +47,20 @@ public class Robot extends TimedRobot {
 	//subsystems
 	public static DriveSystem driveSystem;
 	public static LifterSystem lifterSystem;
-	public static PneumaticSystem pneumaticSystem;
+
 	public static PiComSystem piComSystem;
+
+	public static PneumaticGrabberSystem pneumaticGrabberSystem;
+	public static PneumaticGearSystem pneumaticGearSystem;
+	public static EncoderSystem encoderSystem;
+
 	//public static AHRS ahrs;
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	/**
+	/*
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
@@ -53,14 +68,22 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
 		lifterSystem = new LifterSystem();
-		pneumaticSystem = new PneumaticSystem();
+
+		
 		piComSystem = new PiComSystem();
 		
+
+		pneumaticGrabberSystem = new PneumaticGrabberSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
+		pneumaticGearSystem = new PneumaticGearSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo);
+		
+		//encoderSystem = new EncoderSystem();
+
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
 		
 	}
@@ -94,7 +117,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//m_autonomousCommand = m_chooser.getSelected();
-		m_autonomousCommand = new DriveStraightAndRight();
+		//m_autonomousCommand = new DriveStraightAndRight();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -103,7 +126,7 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		// schedule the autonomous command (example)
+		 //schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -114,7 +137,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
 	}
 
 	@Override
