@@ -8,6 +8,6 @@ public class DriveStraight extends CommandGroup{
 	//drive straight
 	public DriveStraight() {
 		super("DriveStraight");
-		addSequential(new AutoDriveRobot(.8, .8, .8, .8, 3));
+		addSequential(new AutoDriveRobot(.6, .6, .6, .6, 3.5));
 	}
 }

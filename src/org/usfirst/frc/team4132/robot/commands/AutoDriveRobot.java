@@ -21,7 +21,7 @@ public class AutoDriveRobot extends Command{
 	}
 	
 	public void execute() {
-		Robot.driveSystem.controlAllDriveWheels(backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
+		Robot.driveSystem.controlAllDriveWheels(-backLeftSpeed, backRightSpeed, -frontLeftSpeed, frontRightSpeed);
 	}
 	@Override
 	protected boolean isFinished() {

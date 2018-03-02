@@ -6,7 +6,7 @@ import org.usfirst.frc.team4132.robot.XboxControllerMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveFromJoystick extends Command{
-	private final double DRIVE_SPEED = .6d;
+	private final double DRIVE_SPEED = .8d;
 	private int invert = -1;
 	private double oldInput = 0;
 	private double newInput = 0;
@@ -26,6 +26,7 @@ public class DriveFromJoystick extends Command{
 		newInput = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_Y);
 		
 		double yMovement = 0;
+		
 		
 		/* this is all garbage
 		if(Math.abs(newInput-oldInput) > maxChange && newInput > oldInput) {
