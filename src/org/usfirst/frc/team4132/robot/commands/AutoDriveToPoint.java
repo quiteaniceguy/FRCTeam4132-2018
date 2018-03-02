@@ -57,7 +57,9 @@ public class AutoDriveToPoint extends Command{
 		}
 		*/
 		turn();
+		Timer.delay(0.1);
 		linearMovement();
+		Timer.delay(0.1);
 		
 		RobotPosData.xPos = xDest;
 		RobotPosData.yPos = yDest;

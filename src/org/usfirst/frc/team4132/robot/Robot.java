@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team4132.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,8 +15,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
-import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4132.robot.commands.CenterStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.CenterStartRightSideGoal;
+import org.usfirst.frc.team4132.robot.commands.LeftSideStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.LeftSideStartRightSideGoal;
+import org.usfirst.frc.team4132.robot.commands.RightSideStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.RightSideStartRightSideGoal;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
@@ -49,11 +54,11 @@ public class Robot extends TimedRobot {
 	public static PneumaticGearSystem pneumaticGearSystem;
 	public static EncoderSystem encoderSystem;
 
+	Command m_autonomousCommand;
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	//public static AHRS ahrs;
 	public static OI m_oi;
 
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/*
 	 * This function is run when the robot is first started up and should be
@@ -62,7 +67,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addDefault("Right Side Auto", new RightSideStartRightSideGoal());
+		m_chooser.addObject("Center Auto", new CenterStartRightSideGoal());
+		m_chooser.addObject("Left Side Auto", new LeftSideStartRightSideGoal());
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -121,7 +128,33 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		 //schedule the autonomous command (example)
+		 //schedule the autonomous command (example)String gameData;
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		// If the goal is to the left, then change the autonomous accordingly
+        if (gameData.length() > 0) {
+        	if (gameData.charAt(0) == 'L') {
+        		if(m_chooser.getSelected().getClass().getName() == "org.usfirst.frc.team4132.robot.commands.RightSideStartRightSideGoal") {
+        			m_autonomousCommand = new RightSideStartLeftSideGoal();
+        		}
+        		else if(m_chooser.getSelected().getClass().getName() == "org.usfirst.frc.team4132.robot.commands.CenterStartRightSideGoal") {
+        			m_autonomousCommand = new CenterStartLeftSideGoal();
+        		}
+        		else {
+        			m_autonomousCommand = new LeftSideStartLeftSideGoal();
+        		}
+        	} 
+        	// If the goal is not to the left, use the selected autonomous
+        	else {
+        		m_autonomousCommand = m_chooser.getSelected();
+        	}
+        }
+        // If the goal is not to the left, use the selected autonomous
+        else {
+        	m_autonomousCommand = m_chooser.getSelected();
+        }
+        
+        // Start autonomous
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -132,7 +165,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		//Scheduler.getInstance().run();
+		Scheduler.getInstance().run();
 	}
 
 	@Override
