@@ -25,6 +25,7 @@ import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
+import org.usfirst.frc.team4132.robot.subsystems.VisionSystem;
 
 //import com.kauailabs.navx.frc.AHRS;
 
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
 	public static PneumaticGrabberSystem pneumaticGrabberSystem;
 	public static PneumaticGearSystem pneumaticGearSystem;
 	public static EncoderSystem encoderSystem;
+	public static VisionSystem visionSystem;
 
 	//public static AHRS ahrs;
 	public static OI m_oi;
@@ -73,14 +75,10 @@ public class Robot extends TimedRobot {
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
 		lifterSystem = new LifterSystem();
-
-		
 		piComSystem = new PiComSystem();
-		
-
 		pneumaticGrabberSystem = new PneumaticGrabberSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
 		pneumaticGearSystem = new PneumaticGearSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo);
-		
+		visionSystem = new VisionSystem();
 		//encoderSystem = new EncoderSystem();
 
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
