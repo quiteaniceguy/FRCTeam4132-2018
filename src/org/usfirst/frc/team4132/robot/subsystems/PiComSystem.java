@@ -29,14 +29,6 @@ public class PiComSystem extends Subsystem{
 		return angle;
 	}
 	
-	/*
-	 * Returns array of phone position
-	 */
-	public double[] getPosData() {
-		double[] position = new double[2];
-		return position;
-	}
-	
 	
 	/*
 	 * Returns time on raspberry pi. May get rid of this, not necessary?

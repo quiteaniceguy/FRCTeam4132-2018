@@ -38,6 +38,7 @@ public class DriveToPoint extends CommandGroup{
 			}
 			rAngle = Robot.piComSystem.getGyroData();
 		}
+		addSequential(new AutoDriveRobot(0, 0, 0, 0, 0.1));
 		d = Math.sqrt(Math.pow(x - xPos, 2) + Math.pow(y - yPos, 2));
 		double[] times = findMoveTimes(a,g,d,u);
 		addSequential(new AutoDriveRobot(a, a, a, a, times[0]));

@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4132.robot;
 
-import org.usfirst.frc.team4132.robot.commands.SpinGumball;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
