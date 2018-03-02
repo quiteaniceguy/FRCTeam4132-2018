@@ -5,32 +5,84 @@ import org.usfirst.frc.team4132.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team4132.robot.RobotPosData;
 
-public class AutoDriveToPoint extends CommandGroup{
-	double angle, rAngle, xPos, yPos, xDest, yDest, distance; //angle is the angle to the point, and rAngle is the robot's current angle
+public class AutoDriveToPoint extends Command{
+	double angleToDest, robotAngle, xPos, yPos, xDest, yDest, disatanceToDest; //angleToDest is the angleToDest to the point, and robotAngle is the robot's current angleToDest
 	double angleErrorMargin = 0.25;
-	double speed = .8;
-	AutoDriveToPoint(double xPos, double yPos, double xDest, double yDest) {
-		this.xPos = xPos;
-		this.yPos = yPos;
-		distance = Math.sqrt(Math.pow((xDest - xPos), 2)+Math.pow((yDest-yPos), 2));
+	double driveSpeed = .8;
+	double rotateSpeed = 1;
+	boolean done = false;
+	
+	AutoDriveToPoint(double xDest, double yDest) {
+		this.xPos = RobotPosData.xPos;
+		this.yPos = RobotPosData.yPos;
+		
+		this.xDest = xDest;
+		this.yDest = yDest;
+		
+		robotAngle = Robot.piComSystem.getGyroData();
+		
+		disatanceToDest = Math.sqrt(Math.pow((xDest - xPos), 2)+Math.pow((yDest-yPos), 2));
 		if (xPos >= xDest) {
-			angle = Math.atan((yDest-yPos)/(xDest-xPos));
+			angleToDest = Math.atan((yDest-yPos)/(xDest-xPos));
 		}
 		else {
-			angle = Math.atan((yDest-yPos)/(xDest-xPos)) + Math.PI;
+			angleToDest = Math.atan((yDest-yPos)/(xDest-xPos)) + Math.PI;
 		}
-		if (angle < 0) {
-			angle = 2 * Math.PI + angle;
-		}
-		while (rAngle < angle - angleErrorMargin || rAngle > angle + angleErrorMargin) {
-			if (angle - rAngle > Math.PI) {
-				Robot.driveSystem.controlAllDriveWheels(speed, -speed, speed, -speed); //May not rotate the correct way, does not give the correct acceleration value
-			}
-			else {
-				Robot.driveSystem.controlAllDriveWheels(-speed, speed, -speed, speed); //May not rotate the correct way, does not give the correct acceleration value
-			}
-			rAngle = Robot.piComSystem.getGyroData();
+		if (angleToDest < 0) {
+			angleToDest = 2 * Math.PI + angleToDest;
 		}
 	}
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return done;
+	}
+	
+	public void execute() {
+		/*
+		while (robotAngle < angleToDest - angleErrorMargin || robotAngle > angleToDest + angleErrorMargin) {
+			if (angleToDest - robotAngle > Math.PI) {
+				Robot.driveSystem.controlAllDriveWheels(rotateSpeed, -rotateSpeed, rotateSpeed, -rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+			}
+			else {
+				Robot.driveSystem.controlAllDriveWheels(-rotateSpeed, rotateSpeed, -rotateSpeed, rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+			}
+			robotAngle = Robot.piComSystem.getGyroData();
+		}
+		Robot.encoderSystem.distanceReset();
+		while (Robot.encoderSystem.getDistance() < disatanceToDest) {
+			Robot.driveSystem.controlAllDriveWheels(driveSpeed, driveSpeed, driveSpeed, driveSpeed);
+		}
+		*/
+		turn();
+		linearMovement();
+		
+		RobotPosData.xPos = xDest;
+		RobotPosData.yPos = yDest;
+		done = true;
+	}
+	
+	public void turn() {
+		while (robotAngle < angleToDest - angleErrorMargin || robotAngle > angleToDest + angleErrorMargin) {
+			if (angleToDest - robotAngle > Math.PI) {
+				Robot.driveSystem.controlAllDriveWheels(rotateSpeed, -rotateSpeed, rotateSpeed, -rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+			}
+			else {
+				Robot.driveSystem.controlAllDriveWheels(-rotateSpeed, rotateSpeed, -rotateSpeed, rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+			}
+			robotAngle = Robot.piComSystem.getGyroData();
+		}
+	}
+	
+	public void linearMovement() {
+		Robot.encoderSystem.distanceReset();
+		while (Robot.encoderSystem.getDistance() < disatanceToDest) {
+			Robot.driveSystem.controlAllDriveWheels(driveSpeed, driveSpeed, driveSpeed, driveSpeed);
+		}
+		Robot.driveSystem.zeroWheels();
+	}
+	
+	
 }

@@ -23,7 +23,12 @@ public class EncoderSystem extends Subsystem{
 	
 	/* use this to convert count into a real distance */
 	public double getDistance() {
-		return DISTANCE_RATE * encoder.get();
+		///must make distanc
+		return Math.abs(DISTANCE_RATE * encoder.get());
+	}
+	
+	public void distanceReset() {
+		encoder.reset();
 	}
 
 }

@@ -15,16 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
-<<<<<<< HEAD
-import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
-=======
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.EncoderSystem;
-import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
->>>>>>> fcd5181312f8573a93f56fca061d41ac5005d0c9
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;

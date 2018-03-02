@@ -131,7 +131,9 @@ public class DriveSystem extends Subsystem{
 		setFrontRightWheel(frontRightSpeed);
 	}
 	
-
+	public void zeroWheels() {
+		controlAllDriveWheels(0, 0, 0, 0);
+	}
 	
 	
 	

@@ -26,8 +26,7 @@ public class PiComSystem extends Subsystem{
 		return angle;
 	}
 	
-<<<<<<< HEAD
-=======
+
 	/*
 
 	 * Returns array of phone position
@@ -37,7 +36,7 @@ public class PiComSystem extends Subsystem{
 		return position;
 	}
 	
->>>>>>> fcd5181312f8573a93f56fca061d41ac5005d0c9
+
 	
 	public int getPiTime() {
 		
