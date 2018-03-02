@@ -21,7 +21,6 @@ public class AutoWithGyro extends Command{
 		return false;
 	}
 	/*
-	 * 
 	 * turns robot with speed 'speed'(positive is clockwise) for degrees 'degrees'
 	 */
 	public void turn(double speed, double degrees) {

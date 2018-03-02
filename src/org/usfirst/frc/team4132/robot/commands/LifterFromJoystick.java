@@ -25,6 +25,7 @@ public class LifterFromJoystick extends Command{
 	
 	public void execute() {
 		double lifterSpeed = 0;
+		/* alternate lifter controls */
 		/*
 		if(Robot.m_oi.stickOne.getRawButton(XboxControllerMap.LB)) {
 			lifterSpeed = lifterLowerSpeed;

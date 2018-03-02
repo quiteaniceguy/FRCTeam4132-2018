@@ -21,9 +21,6 @@ public class PiComSystem extends Subsystem{
 		
 	}
 	
-	/*
-	 * Returns array of gyroscope data
-	 */
 	public double getGyroData() {
 		double angle = 0;
 		return angle;
@@ -39,10 +36,6 @@ public class PiComSystem extends Subsystem{
 	}
 	
 	
-	/*
->>>>>>> a2915a0824b8af35ec9f06f951b06a237b6fd624
-	 * Returns time on raspberry pi. May get rid of this, not necessary?
-	 */
 	public int getPiTime() {
 		
 		return (int) 1/*table.getEntry("robotTime").getNumber(0)*/;
