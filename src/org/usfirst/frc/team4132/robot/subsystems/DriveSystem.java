@@ -16,10 +16,7 @@ public class DriveSystem extends Subsystem{
 	private Talon frontRightTalon;
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
-	
-	public Encoder rightEncoder;
-	public Encoder leftEncoder;
-	
+		
 	private DifferentialDrive robotDrive;
 	private DifferentialDrive robotDriveTwo;
 	
@@ -48,14 +45,6 @@ public class DriveSystem extends Subsystem{
 		
 		robotDrive = new DifferentialDrive(left, right);
 		
-		
-		
-		/*  sensors */
-		
-		rightEncoder = new Encoder(RobotMap.rightEncoderOne, RobotMap.rightEncoderTwo);
-		leftEncoder = new Encoder(RobotMap.leftEncoderOne, RobotMap.leftEncoderTwo);
-		
-	
 		
 		
 	}
@@ -142,10 +131,7 @@ public class DriveSystem extends Subsystem{
 		setFrontRightWheel(frontRightSpeed);
 	}
 	
-	public void zeroEncoders() {
-		rightEncoder.reset();
-		leftEncoder.reset();
-	}
+
 	
 	
 	
