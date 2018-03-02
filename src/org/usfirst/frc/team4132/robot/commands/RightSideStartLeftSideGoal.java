@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4132.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RightSideStartLeftSideGoal extends CommandGroup {
@@ -27,9 +28,9 @@ public class RightSideStartLeftSideGoal extends CommandGroup {
 		}
 		addSequential(new AutoLift(0.8, 3));
 		addSequential(new AutoGrab(true));
-		addSequential(new Pause(0.5));
+		Timer.delay(0.5);
 		addSequential(new AutoGrab(false));
-		addSequential(new Pause(0.2));
+		Timer.delay(0.2);
 		addSequential(new AutoLift(-0.8, 2));
 	}
 }
