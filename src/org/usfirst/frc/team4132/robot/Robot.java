@@ -7,9 +7,11 @@
 
 package org.usfirst.frc.team4132.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -59,7 +61,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	//SendableChooser<CommandGroup> m_chooser;
 
 	/*
 	 * This function is run when the robot is first started up and should be
@@ -68,10 +70,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		
-		SmartDashboard.putData("Auto mode", m_chooser);
+		//m_chooser = new SendableChooser<CommandGroup>();
+		//m_chooser.addDefault("Right Side", new DriveStraight());
+		//m_chooser.addObject("Left Side", new DriveStraight());
+		//m_chooser.addObject("Just Straight", new DriveStraightAndRight());
+		 //chooser.addObject("My Auto", new MyAutoCommand());
+
+		//SmartDashboard.putData("Autonomous mode chooser", m_chooser);
 		
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
@@ -114,6 +119,22 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		//m_autonomousCommand = m_chooser.getSelected();
+
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		/*if (gameData.length() > 0) {
+			if(m_chooser.getSelected().getClass().getName() == "org.usfirst.frc.team4132.robot.commands.RightSide") {
+        			m_autonomousCommand = new RightSideGoal();
+        		}
+        	if (gameData.charAt(0) == 'L') {
+        		
+        		m_autonomousCommand = m_chooser.getSelected();
+        	}
+        }
+		else {
+			m_autonomousCommand = m_chooser.getSelected();
+		}*/
 		//m_autonomousCommand = m_chooser.getSelected();
 		m_autonomousCommand = new DriveStraight();
 

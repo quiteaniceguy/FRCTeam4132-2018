@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DriveToPoint extends CommandGroup{
+	/*
 	private double a = 0, g = 9.81, d = 0, u = 0.8, xPos, yPos, angle, rAngle;
 	double[] positions = new double[2];
 	public DriveToPoint(double x, double y) {
@@ -70,5 +71,6 @@ public class DriveToPoint extends CommandGroup{
 		double[] times = {accelTime, deccelTime};
 		return times;
 	}
+	*/
 
 }

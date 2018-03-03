@@ -28,6 +28,7 @@ public class RobotMap {
 	public static int frontRightMotor = 2, frontLeftMotor = 3, backRightMotor = 0, backLeftMotor = 5, armLifter = 1;
 	public static int rightEncoderOne = 0, rightEncoderTwo = 1, leftEncoderOne = 2, leftEncoderTwo = 3;
 	public static int grabberSolenoidOne = 0, grabberSolenoidTwo = 1, gearSolenoidOne = 2, gearSolenoidTwo = 3; 
+	public static int limitSwitch = 0;
 
 	
 }

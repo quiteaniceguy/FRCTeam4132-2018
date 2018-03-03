@@ -11,14 +11,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSystem extends Subsystem{
+	
 	final double ARCADE_DRIVE_SPEED = 1;
+	
 	private Talon frontLeftTalon;
 	private Talon frontRightTalon;
 	private Talon backLeftTalon;
 	private Talon backRightTalon;
 		
 	private DifferentialDrive robotDrive;
-	private DifferentialDrive robotDriveTwo;
+	
+	private SpeedControllerGroup right;
+	private SpeedControllerGroup left;
 	
 	
 	/*may need to change dependencies to make this work */
@@ -27,6 +31,7 @@ public class DriveSystem extends Subsystem{
 	
 	public DriveSystem(){
 		/*  motors  */
+		
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
 		frontLeftTalon.setInverted(true);
 		
@@ -39,11 +44,11 @@ public class DriveSystem extends Subsystem{
 		
 		backRightTalon = new Talon(RobotMap.backRightMotor);
 		
+		left = new SpeedControllerGroup(frontLeftTalon, backLeftTalon);
+		right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
 		
-		SpeedControllerGroup left = new SpeedControllerGroup(frontLeftTalon, backLeftTalon);
-		SpeedControllerGroup right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
 		
-		robotDrive = new DifferentialDrive(left, right);
+		
 		
 		
 		
@@ -55,81 +60,54 @@ public class DriveSystem extends Subsystem{
 		setDefaultCommand(new DriveFromJoystick()); 
 	}
 	
-	public void drive(double yDriveSpeed, double xDriveSpeed, double driveRotation){
-		//why multiply? idk
-		
-		
-		robotDrive.arcadeDrive(yDriveSpeed * ARCADE_DRIVE_SPEED, xDriveSpeed * ARCADE_DRIVE_SPEED);
-		/*
-		System.out.println("Right encoder count: " + rightEncoder.get());
-		System.out.println("Left encoder count: " + leftEncoder.get());
-		*/
-		 
-		/*
-		System.out.println("yDriveSpeed: " + yDriveSpeed);
-		System.out.println("xDriveSpeed: " + xDriveSpeed);
-		System.out.println("driveRotation: " + driveRotation);
-		*/
-		
-		////lighting up 3
-		
-		/*     this is horrible stuff
-		if(Robot.m_oi.stickOne.getRawButton(4)) {
-			
-			frontRightTalon.set(1);
-			System.out.println("button 4");
-		}else {
-			frontRightTalon.set(0);
-		}
-		
-		if(Robot.m_oi.stickOne.getRawButton(1)) {
-			
-			backRightTalon.set(1);
-			System.out.println("button 1");
-		}else {
-			backRightTalon.set(0);
-		}
-		
-		if(Robot.m_oi.stickOne.getRawButton(2)) {
-		
-			frontLeftTalon.set(1);
-			System.out.println("button 2");
-		}else {
-			frontLeftTalon.set(0);
-		}
-		
-		if(Robot.m_oi.stickOne.getRawButton(3)) {
-			backLeftTalon.set(1);
-			System.out.println("button 3");
-		}else {
-			backLeftTalon.set(0);
-		}
-		*/
-		
-	}
+	
 	
 	public void setBackLeftWheel(double speed) {
-		backLeftTalon.set(speed);
+		//backLeftTalon.set(speed);
 	}
 	
 	public void setFrontLeftWheel(double speed) {
-		frontLeftTalon.set(speed);
+		//frontLeftTalon.set(speed);
 	}
 	
 	public void setBackRightWheel(double speed) {
-		backRightTalon.set(speed);
+		//backRightTalon.set(speed);
 	}
 	
 	public void setFrontRightWheel(double speed) {
-		frontRightTalon.set(speed);
+		//frontRightTalon.set(speed);
 	}
 	
 	public void controlAllDriveWheels(double backLeftSpeed, double backRightSpeed, double frontLeftSpeed, double frontRightSpeed) {
+		
 		setBackLeftWheel(backLeftSpeed);
 		setFrontLeftWheel(frontLeftSpeed);
 		setBackRightWheel(backRightSpeed);
 		setFrontRightWheel(frontRightSpeed);
 	}
+	
+	public Talon getFRTalon() {
+		return frontRightTalon;
+	}
+	public Talon getBRTalon() {
+		return backRightTalon;
+	}
+	public Talon getFLTalon() {
+		return frontLeftTalon;
+	}
+	public Talon getBLTalon() {
+		return backLeftTalon;
+	}
+	
+	public SpeedControllerGroup rightSpeedGrp(){
+		return right;
+	}
+	
+	public SpeedControllerGroup leftSpeedGrp(){
+		return left;
+	}
+	
+	
 	
 
 	

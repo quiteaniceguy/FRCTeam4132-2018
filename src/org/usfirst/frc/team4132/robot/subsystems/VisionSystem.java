@@ -16,8 +16,8 @@ public class VisionSystem extends Subsystem{
 	
 	public VisionSystem(){
 		camera = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-		camera.setResolution(320, 240);
-		camera.setFPS(10);
+		camera.setResolution(160, 120);
+		camera.setFPS(5);
 	}
 	@Override
 	protected void initDefaultCommand() {
