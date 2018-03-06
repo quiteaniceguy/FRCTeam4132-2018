@@ -31,9 +31,7 @@ import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
 import org.usfirst.frc.team4132.robot.subsystems.VisionSystem;
 
-//import com.kauailabs.navx.frc.AHRS;
 
-//import com.kauailabs.navx.frc.AHRS;
 
 
 /**

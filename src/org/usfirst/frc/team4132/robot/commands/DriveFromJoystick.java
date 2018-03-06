@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveFromJoystick extends Command{
-	private final double DRIVE_SPEED = .8d;
+	private final double DRIVE_SPEED = 1d;
 	private int invert = -1;
 	private double currSpeed = 0;
 	private double desiredSpeed = 0;
-	private double maxChange = 0.05;
+	private double maxChange = 0.06125;
 	double preTime;
 	
 	DifferentialDrive robotDrive;
@@ -39,19 +39,18 @@ public class DriveFromJoystick extends Command{
 	
 	public void execute(){
 		desiredSpeed = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_Y);
+		deltaSpeed = 0;
 
-
-		/*if(Math.abs(desiredSpeed - currSpeed) > maxChange){
-			deltaSpeed = maxChange * (Math.abs(desiredSpeed-currSpeed) / desiredSpeed-currSpeed);
+		if(Math.abs(desiredSpeed - currSpeed) > maxChange){
+			deltaSpeed = maxChange * (Math.abs(desiredSpeed-currSpeed) / (desiredSpeed-currSpeed));
 			currSpeed += deltaSpeed;
 		}
 		else {
 			currSpeed = desiredSpeed;
-		}*/
+		}
 		
-		System.out.println(System.currentTimeMillis()-preTime);
-		preTime = System.currentTimeMillis();
-		yMovement = desiredSpeed * DRIVE_SPEED * invert;
+	
+		yMovement = currSpeed * DRIVE_SPEED * invert;
 		xMovement = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_X) * DRIVE_SPEED;
 		//movementRotation = Robot.m_oi.stickOne.getRawAxis(2);
 		
@@ -59,7 +58,7 @@ public class DriveFromJoystick extends Command{
 		
 		
 		//currSpeed = desiredSpeed;
-		//System.out.println("Current Speed: " + currSpeed + " Desired Speed:" + desiredSpeed + " deltaSpeed: " + deltaSpeed);
+		System.out.println("\n\nCurrent Speed: " + currSpeed + " \nDesired Speed:" + desiredSpeed + " \ndeltaSpeed: " + deltaSpeed);
 		//System.out.println("getting the angle: " + Robot.ahrs.getAngle());
 		
 	}
