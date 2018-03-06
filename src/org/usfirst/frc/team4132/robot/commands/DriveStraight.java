@@ -18,10 +18,10 @@ public class DriveStraight extends CommandGroup{
 		*/
 		//addSequential(new AutoDriveRobot(.66, .25, .66, .25, 3));
 		
-		addSequential(new AutoDriveRobot(1, 0, 0, 0, 1)); //Back left
-		//addSequential(new AutoDriveRobot(0, 1, 0, 0, 1)); //Back Right
-		//addSequential(new AutoDriveRobot(0, 0, 1, 0, 1)); //Front left
-		//addSequential(new AutoDriveRobot(0, 0, 0, 1, 1)); //Front Right
+		addSequential(new AutoDriveRobot(.5, 0, 0, 0, 1)); //Back left
+		addSequential(new AutoDriveRobot(0, .5, 0, 0, 1)); //Front left
+		addSequential(new AutoDriveRobot(0, 0, .5, 0, 1)); //Back right
+		addSequential(new AutoDriveRobot(0, 0, 0, .5, 1)); //Front Right
 		
 	}
 }

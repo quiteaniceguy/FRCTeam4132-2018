@@ -7,6 +7,8 @@ To-do:
 	autonomous code for lifting and dropping box
 	finding random start position
 	make linear movement account use gyroscope for straighter movement
+	calibrate motors to go straighter
+	make sure motors are on correct ports
 	
 	
 	

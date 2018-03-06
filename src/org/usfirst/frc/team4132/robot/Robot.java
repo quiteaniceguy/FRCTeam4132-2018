@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.DriveStraight;
 import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
 import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
+	Command driveFromJoystick;
 	//SendableChooser<CommandGroup> m_chooser;
 
 	/*
@@ -88,6 +90,7 @@ public class Robot extends TimedRobot {
 		//encoderSystem = new EncoderSystem();
 
 		//ahrs = new AHRS(SerialPort.Port.kOnboard);
+		
 		
 	}
 
@@ -168,6 +171,11 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
+		
+		
+		driveFromJoystick = new DriveFromJoystick();
+		driveFromJoystick.start();
 	}
 
 	/**

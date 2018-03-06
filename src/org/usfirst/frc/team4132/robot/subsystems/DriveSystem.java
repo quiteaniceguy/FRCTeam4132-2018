@@ -14,33 +14,34 @@ public class DriveSystem extends Subsystem{
 	
 	final double ARCADE_DRIVE_SPEED = 1;
 	
-	private Talon frontLeftTalon;
-	private Talon frontRightTalon;
-	private Talon backLeftTalon;
-	private Talon backRightTalon;
-		
-	private DifferentialDrive robotDrive;
-	
-	private SpeedControllerGroup right;
-	private SpeedControllerGroup left;
+	public Talon frontLeftTalon;
+	public Talon frontRightTalon;
+	public Talon backLeftTalon;
+	public Talon backRightTalon;
+			
+	public SpeedControllerGroup right;
+	public SpeedControllerGroup left;
 	
 	
 	/*may need to change dependencies to make this work */
 	
-
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		//setDefaultCommand(new DriveFromJoystick()); 
+	}
 	
 	public DriveSystem(){
 		/*  motors  */
 		
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
-		frontLeftTalon.setInverted(true);
 		
 		
 		frontRightTalon = new Talon(RobotMap.frontRightMotor);
 		frontRightTalon.setInverted(true);
 
 		backLeftTalon = new Talon(RobotMap.backLeftMotor);
-		
+		backLeftTalon.setInverted(true);
 		
 		backRightTalon = new Talon(RobotMap.backRightMotor);
 		
@@ -54,49 +55,28 @@ public class DriveSystem extends Subsystem{
 		
 	}
 	
-	@Override
-	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		setDefaultCommand(new DriveFromJoystick()); 
-	}
-	
-	
-	
 	public void setBackLeftWheel(double speed) {
-		//backLeftTalon.set(speed);
+		backLeftTalon.set(speed);
 	}
 	
 	public void setFrontLeftWheel(double speed) {
-		//frontLeftTalon.set(speed);
+		frontLeftTalon.set(speed);
 	}
 	
 	public void setBackRightWheel(double speed) {
-		//backRightTalon.set(speed);
+		backRightTalon.set(speed);
 	}
 	
 	public void setFrontRightWheel(double speed) {
-		//frontRightTalon.set(speed);
+		frontRightTalon.set(speed);
 	}
 	
-	public void controlAllDriveWheels(double backLeftSpeed, double backRightSpeed, double frontLeftSpeed, double frontRightSpeed) {
+	public void controlAllDriveWheels(double backLeftSpeed, double frontLeftSpeed, double backRightSpeed, double frontRightSpeed) {
 		
 		setBackLeftWheel(backLeftSpeed);
 		setFrontLeftWheel(frontLeftSpeed);
 		setBackRightWheel(backRightSpeed);
 		setFrontRightWheel(frontRightSpeed);
-	}
-	
-	public Talon getFRTalon() {
-		return frontRightTalon;
-	}
-	public Talon getBRTalon() {
-		return backRightTalon;
-	}
-	public Talon getFLTalon() {
-		return frontLeftTalon;
-	}
-	public Talon getBLTalon() {
-		return backLeftTalon;
 	}
 	
 	public SpeedControllerGroup rightSpeedGrp(){

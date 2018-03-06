@@ -20,7 +20,6 @@ public class AutoGrab extends Command{
 		else {
 			pneumaticSystem.set(DoubleSolenoid.Value.kReverse);
 		}
-		//Timer.delay(1.5);
 		done = true;
 	}
 	@Override
