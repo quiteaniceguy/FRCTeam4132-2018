@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4132.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -63,7 +64,6 @@ public class Robot extends TimedRobot {
 
 	Command m_autonomousCommand;
 	Command driveFromJoystick;
-	//SendableChooser<CommandGroup> m_chooser;
 
 	/*
 	 * This function is run when the robot is first started up and should be
@@ -71,14 +71,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		String cool = SmartDashboard.getString("DB/String 0", "myDefaultData");
 		m_oi = new OI();
-		//m_chooser = new SendableChooser<CommandGroup>();
-		//m_chooser.addDefault("Right Side", new DriveStraight());
-		//m_chooser.addObject("Left Side", new DriveStraight());
-		//m_chooser.addObject("Just Straight", new DriveStraightAndRight());
-		 //chooser.addObject("My Auto", new MyAutoCommand());
-
-		//SmartDashboard.putData("Autonomous mode chooser", m_chooser);
+		
 		
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
@@ -89,7 +84,7 @@ public class Robot extends TimedRobot {
 		visionSystem = new VisionSystem();
 		//encoderSystem = new EncoderSystem();
 
-		//ahrs = new AHRS(SerialPort.Port.kOnboard);
+		ahrs = new AHRS(SPI.Port.kMXP);
 		
 		
 	}
@@ -126,6 +121,7 @@ public class Robot extends TimedRobot {
 
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		System.out.println(gameData);
 		/*if (gameData.length() > 0) {
 			if(m_chooser.getSelected().getClass().getName() == "org.usfirst.frc.team4132.robot.commands.RightSide") {
         			m_autonomousCommand = new RightSideGoal();
@@ -139,7 +135,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand = m_chooser.getSelected();
 		}*/
 		//m_autonomousCommand = m_chooser.getSelected();
-		m_autonomousCommand = new DriveStraight();
+		//m_autonomousCommand = new DriveStraight();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -172,7 +168,8 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		
-		
+		ahrs.zeroYaw();
+		ahrs.reset();
 		
 		driveFromJoystick = new DriveFromJoystick();
 		driveFromJoystick.start();
@@ -183,6 +180,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		//System.out.println("\nGyro X: " + ahrs.getRoll()+ "\nGyro Y: " + ahrs.getPitch()+ "\nGyro Z: " + ahrs.getYaw());
 		Scheduler.getInstance().run();
 	}
 
@@ -191,5 +189,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		
 	}
 }

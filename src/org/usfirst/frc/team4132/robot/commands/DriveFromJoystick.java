@@ -14,7 +14,6 @@ public class DriveFromJoystick extends Command{
 	private double currSpeed = 0;
 	private double desiredSpeed = 0;
 	private double maxChange = 0.06125;
-	double preTime;
 	
 	DifferentialDrive robotDrive;
 	
@@ -26,7 +25,6 @@ public class DriveFromJoystick extends Command{
 	public DriveFromJoystick(){
 		super("DriveFromJoystick");
 		requires(Robot.driveSystem);
-		preTime = System.currentTimeMillis();
 	
 		robotDrive = new DifferentialDrive(Robot.driveSystem.leftSpeedGrp(), Robot.driveSystem.rightSpeedGrp());
 		robotDrive.setSafetyEnabled(false);
@@ -58,7 +56,7 @@ public class DriveFromJoystick extends Command{
 		
 		
 		//currSpeed = desiredSpeed;
-		System.out.println("\n\nCurrent Speed: " + currSpeed + " \nDesired Speed:" + desiredSpeed + " \ndeltaSpeed: " + deltaSpeed);
+		//System.out.println("\n\nCurrent Speed: " + currSpeed + " \nDesired Speed:" + desiredSpeed + " \ndeltaSpeed: " + deltaSpeed);
 		//System.out.println("getting the angle: " + Robot.ahrs.getAngle());
 		
 	}
