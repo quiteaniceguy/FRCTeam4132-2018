@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LifterFromJoystick extends Command{
 	private final double LIFTER_CAP = .8;
 	private final double INVERT_LIFT_CONTROLLER = -1;
-	private double lifterLowerSpeed = - 0.3d;
-	private double lifterRaiseSpeed = .7d;
 	
 	
 	

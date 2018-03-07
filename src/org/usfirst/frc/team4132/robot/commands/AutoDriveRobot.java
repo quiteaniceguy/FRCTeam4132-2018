@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoDriveRobot extends Command{
 	private double backLeftSpeed, backRightSpeed, frontRightSpeed, frontLeftSpeed;
-	public AutoDriveRobot(double backLeftSpeed, double frontLeftSpeed, double backRightSpeed, double frontRightSpeed, double time) {
+	public AutoDriveRobot(double backLeftSpeed, double backRightSpeed, double frontRightSpeed, double frontLeftSpeed, double time) {
 		
 		super("AutoDriveRobot");
 		
@@ -18,11 +18,10 @@ public class AutoDriveRobot extends Command{
 		this.backRightSpeed = backRightSpeed;
 		this.frontLeftSpeed = frontLeftSpeed;
 		this.frontRightSpeed = frontRightSpeed;
-		
 	}
 	
 	public void execute() {
-		Robot.driveSystem.controlAllDriveWheels(backLeftSpeed, frontLeftSpeed, backRightSpeed, frontRightSpeed);
+		Robot.driveSystem.controlAllDriveWheels(backLeftSpeed, backRightSpeed, frontLeftSpeed, frontRightSpeed);
 	}
 	@Override
 	protected boolean isFinished() {

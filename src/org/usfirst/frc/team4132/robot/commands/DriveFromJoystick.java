@@ -3,8 +3,6 @@ package org.usfirst.frc.team4132.robot.commands;
 import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.XboxControllerMap;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -14,19 +12,16 @@ public class DriveFromJoystick extends Command{
 	private double currSpeed = 0;
 	private double desiredSpeed = 0;
 	private double maxChange = 0.06125;
-	double preTime;
 	
 	DifferentialDrive robotDrive;
 	
 	private double yMovement = 0;
 	private double xMovement = 0;
-	private double movementRotation = 0;
 	private double deltaSpeed = 0;
 	
 	public DriveFromJoystick(){
 		super("DriveFromJoystick");
 		requires(Robot.driveSystem);
-		preTime = System.currentTimeMillis();
 	
 		robotDrive = new DifferentialDrive(Robot.driveSystem.leftSpeedGrp(), Robot.driveSystem.rightSpeedGrp());
 		robotDrive.setSafetyEnabled(false);
@@ -52,14 +47,9 @@ public class DriveFromJoystick extends Command{
 	
 		yMovement = currSpeed * DRIVE_SPEED * invert;
 		xMovement = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.LEFT_JOY_X) * DRIVE_SPEED;
-		//movementRotation = Robot.m_oi.stickOne.getRawAxis(2);
 		
 		robotDrive.arcadeDrive(xMovement, yMovement);
 		
-		
-		//currSpeed = desiredSpeed;
-		System.out.println("\n\nCurrent Speed: " + currSpeed + " \nDesired Speed:" + desiredSpeed + " \ndeltaSpeed: " + deltaSpeed);
-		//System.out.println("getting the angle: " + Robot.ahrs.getAngle());
 		
 	}
 

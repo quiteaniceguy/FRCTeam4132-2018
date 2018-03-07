@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4132.robot.commands;
 
 import org.usfirst.frc.team4132.robot.Robot;
-import org.usfirst.frc.team4132.robot.XboxControllerMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 

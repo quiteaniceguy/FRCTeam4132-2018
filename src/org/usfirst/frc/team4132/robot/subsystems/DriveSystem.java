@@ -1,14 +1,10 @@
 package org.usfirst.frc.team4132.robot.subsystems;
 
-import org.usfirst.frc.team4132.robot.Robot;
 import org.usfirst.frc.team4132.robot.RobotMap;
-import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSystem extends Subsystem{
 	
@@ -22,7 +18,6 @@ public class DriveSystem extends Subsystem{
 	public SpeedControllerGroup right;
 	public SpeedControllerGroup left;
 	
-	
 	/*may need to change dependencies to make this work */
 	
 	@Override
@@ -33,7 +28,6 @@ public class DriveSystem extends Subsystem{
 	
 	public DriveSystem(){
 		/*  motors  */
-		
 		frontLeftTalon = new Talon(RobotMap.frontLeftMotor);
 		
 		
@@ -47,12 +41,6 @@ public class DriveSystem extends Subsystem{
 		
 		left = new SpeedControllerGroup(frontLeftTalon, backLeftTalon);
 		right = new SpeedControllerGroup(frontRightTalon, backRightTalon);
-		
-		
-		
-		
-		
-		
 	}
 	
 	public void setBackLeftWheel(double speed) {
@@ -79,6 +67,14 @@ public class DriveSystem extends Subsystem{
 		setFrontRightWheel(frontRightSpeed);
 	}
 	
+	public void zeroWheels() {
+		
+		setBackLeftWheel(0);
+		setFrontLeftWheel(0);
+		setBackRightWheel(0);
+		setFrontRightWheel(0);
+	}
+	
 	public SpeedControllerGroup rightSpeedGrp(){
 		return right;
 	}
@@ -86,12 +82,4 @@ public class DriveSystem extends Subsystem{
 	public SpeedControllerGroup leftSpeedGrp(){
 		return left;
 	}
-	
-	
-	
-
-	
-	
-	
-	
 }

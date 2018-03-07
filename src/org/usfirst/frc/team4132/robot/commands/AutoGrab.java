@@ -3,7 +3,6 @@ package org.usfirst.frc.team4132.robot.commands;
 import org.usfirst.frc.team4132.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoGrab extends Command{

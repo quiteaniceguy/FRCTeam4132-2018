@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4132.robot.subsystems;
 
-import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
 import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;

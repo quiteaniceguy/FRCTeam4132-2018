@@ -11,29 +11,24 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4132.robot.commands.CenterStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.CenterStartRightSideGoal;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
-import org.usfirst.frc.team4132.robot.commands.DriveStraight;
-import org.usfirst.frc.team4132.robot.commands.DriveStraightAndRight;
-import org.usfirst.frc.team4132.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4132.robot.commands.SolenoidGearFromJoystick;
-import org.usfirst.frc.team4132.robot.commands.SolenoidGrabberFromJoystick;
+import org.usfirst.frc.team4132.robot.commands.LeftSideStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.LeftSideStartRightSideGoal;
+import org.usfirst.frc.team4132.robot.commands.RightSideStartLeftSideGoal;
+import org.usfirst.frc.team4132.robot.commands.RightSideStartRightSideGoal;
 import org.usfirst.frc.team4132.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team4132.robot.subsystems.EncoderSystem;
-import org.usfirst.frc.team4132.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4132.robot.subsystems.LifterSystem;
-import org.usfirst.frc.team4132.robot.subsystems.PiComSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
-import org.usfirst.frc.team4132.robot.subsystems.VisionSystem;
 
 import com.kauailabs.navx.frc.AHRS;
-
-
 
 
 /**
@@ -44,26 +39,22 @@ import com.kauailabs.navx.frc.AHRS;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem exampleSubsystem
-			= new ExampleSubsystem();
 	
 	//subsystems
 	public static DriveSystem driveSystem;
 	public static LifterSystem lifterSystem;
 
-	public static PiComSystem piComSystem;
-
 	public static PneumaticGrabberSystem pneumaticGrabberSystem;
 	public static PneumaticGearSystem pneumaticGearSystem;
 	public static EncoderSystem encoderSystem;
-	public static VisionSystem visionSystem;
 
-	public static AHRS ahrs;
+	public static AHRS ahrs; /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+
+	//PIDController turnController;
 	public static OI m_oi;
-
 	Command m_autonomousCommand;
 	Command driveFromJoystick;
-	//SendableChooser<CommandGroup> m_chooser;
+
 
 	/*
 	 * This function is run when the robot is first started up and should be
@@ -72,26 +63,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		//m_chooser = new SendableChooser<CommandGroup>();
-		//m_chooser.addDefault("Right Side", new DriveStraight());
-		//m_chooser.addObject("Left Side", new DriveStraight());
-		//m_chooser.addObject("Just Straight", new DriveStraightAndRight());
-		 //chooser.addObject("My Auto", new MyAutoCommand());
-
-		//SmartDashboard.putData("Autonomous mode chooser", m_chooser);
 		
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
 		lifterSystem = new LifterSystem();
-		piComSystem = new PiComSystem();
 		pneumaticGrabberSystem = new PneumaticGrabberSystem(RobotMap.grabberSolenoidOne, RobotMap.grabberSolenoidTwo);
 		pneumaticGearSystem = new PneumaticGearSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo);
-		visionSystem = new VisionSystem();
-		//encoderSystem = new EncoderSystem();
+		encoderSystem = new EncoderSystem();
 
-		//ahrs = new AHRS(SerialPort.Port.kOnboard);
-		
-		
+		ahrs = new AHRS(SerialPort.Port.kMXP);
 	}
 
 	/**
@@ -122,24 +102,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//m_autonomousCommand = m_chooser.getSelected();
-
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		/*if (gameData.length() > 0) {
-			if(m_chooser.getSelected().getClass().getName() == "org.usfirst.frc.team4132.robot.commands.RightSide") {
-        			m_autonomousCommand = new RightSideGoal();
-        		}
-        	if (gameData.charAt(0) == 'L') {
-        		
-        		m_autonomousCommand = m_chooser.getSelected();
-        	}
-        }
-		else {
-			m_autonomousCommand = m_chooser.getSelected();
-		}*/
-		//m_autonomousCommand = m_chooser.getSelected();
-		m_autonomousCommand = new DriveStraight();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -148,7 +110,37 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		 //schedule the autonomous command (example)
+		 //schedule the autonomous command (example)String gameData;
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		// If the goal is to the left, then change the autonomous accordingly
+        if (gameData.length() > 0) {
+        	if (gameData.charAt(0) == 'L') {
+        		if(SmartDashboard.getString("DB/String 0", "myDefaultData") == "Right") {
+        			m_autonomousCommand = new RightSideStartLeftSideGoal();
+        		}
+        		else if(SmartDashboard.getString("DB/String 0", "myDefaultData") == "Center") {
+        			m_autonomousCommand = new CenterStartLeftSideGoal();
+        		}
+        		else {
+        			m_autonomousCommand = new LeftSideStartLeftSideGoal();
+        		}
+        	} 
+        	// If the goal is not to the left, use the selected autonomous
+        	else {
+        		if(SmartDashboard.getString("DB/String 0", "myDefaultData") == "Right") {
+        			m_autonomousCommand = new RightSideStartRightSideGoal();
+        		}
+        		else if(SmartDashboard.getString("DB/String 0", "myDefaultData") == "Center") {
+        			m_autonomousCommand = new CenterStartRightSideGoal();
+        		}
+        		else {
+        			m_autonomousCommand = new LeftSideStartRightSideGoal();
+        		}
+        	}
+        }
+        
+        // Start autonomous
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -171,9 +163,6 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		
-		
-		
 		driveFromJoystick = new DriveFromJoystick();
 		driveFromJoystick.start();
 	}
@@ -184,6 +173,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.print(ahrs.getYaw());
+		System.out.print(ahrs.getPitch());
+		System.out.print(ahrs.getRoll());
 	}
 
 	/**
