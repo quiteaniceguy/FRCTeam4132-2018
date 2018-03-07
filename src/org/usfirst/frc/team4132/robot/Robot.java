@@ -31,6 +31,8 @@ import org.usfirst.frc.team4132.robot.subsystems.PneumaticGearSystem;
 import org.usfirst.frc.team4132.robot.subsystems.PneumaticGrabberSystem;
 import org.usfirst.frc.team4132.robot.subsystems.VisionSystem;
 
+import com.kauailabs.navx.frc.AHRS;
+
 
 
 
@@ -56,7 +58,7 @@ public class Robot extends TimedRobot {
 	public static EncoderSystem encoderSystem;
 	public static VisionSystem visionSystem;
 
-	//public static AHRS ahrs;
+	public static AHRS ahrs;
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
