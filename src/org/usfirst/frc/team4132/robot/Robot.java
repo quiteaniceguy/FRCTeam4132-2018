@@ -8,6 +8,7 @@
 package org.usfirst.frc.team4132.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -62,7 +63,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		String cool = SmartDashboard.getString("DB/String 0", "myDefaultData");
 		m_oi = new OI();
+
 		
 		/*  subsystems  */
 		driveSystem = new DriveSystem();
@@ -71,7 +74,9 @@ public class Robot extends TimedRobot {
 		pneumaticGearSystem = new PneumaticGearSystem(RobotMap.gearSolenoidOne, RobotMap.gearSolenoidTwo);
 		encoderSystem = new EncoderSystem();
 
-		ahrs = new AHRS(SerialPort.Port.kMXP);
+		ahrs = new AHRS(SPI.Port.kMXP);
+		
+		
 	}
 
 	/**
@@ -102,6 +107,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -163,6 +169,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+
 		driveFromJoystick = new DriveFromJoystick();
 		driveFromJoystick.start();
 	}
@@ -172,6 +179,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		//System.out.println("\nGyro X: " + ahrs.getRoll()+ "\nGyro Y: " + ahrs.getPitch()+ "\nGyro Z: " + ahrs.getYaw());
 		Scheduler.getInstance().run();
 		System.out.print(ahrs.getYaw());
 		System.out.print(ahrs.getPitch());
@@ -183,5 +191,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		
 	}
 }
