@@ -67,11 +67,13 @@ public class AutoDriveToPoint extends Command{
 	
 	public void turn() {
 		while ((robotAngle < angleToDest - angleErrorMargin && robotAngle + 2*Math.PI > angleToDest + angleErrorMargin) || (robotAngle > angleToDest + angleErrorMargin && robotAngle < angleToDest - angleErrorMargin + 2*Math.PI)) {
-			if (angleToDest - robotAngle > Math.PI) {
+			if ((Math.abs(angleToDest - robotAngle) > Math.PI && robotAngle < angleToDest) || (robotAngle > angleToDest && (Math.abs(angleToDest - robotAngle) < Math.PI))) {
 				Robot.driveSystem.controlAllDriveWheels(rotateSpeed, -rotateSpeed, rotateSpeed, -rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+				System.out.println("clockwise");
 			}
 			else {
 				Robot.driveSystem.controlAllDriveWheels(-rotateSpeed, rotateSpeed, -rotateSpeed, rotateSpeed); //May not rotate the correct way, does not give the correct acceleration value
+				System.out.println("counterclockwise");
 			}
 			robotAngle = Robot.ahrs.getAngle();
 		}
