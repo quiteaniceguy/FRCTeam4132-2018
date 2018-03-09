@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import org.usfirst.frc.team4132.robot.commands.CenterStartLeftSideGoal;
 import org.usfirst.frc.team4132.robot.commands.CenterStartRightSideGoal;
 import org.usfirst.frc.team4132.robot.commands.DriveFromJoystick;
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
 	public static PneumaticGrabberSystem pneumaticGrabberSystem;
 	public static PneumaticGearSystem pneumaticGearSystem;
 	public static EncoderSystem encoderSystem;
+	
 
 	public static AHRS ahrs; /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 
@@ -55,6 +58,17 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	Command m_autonomousCommand;
 	Command driveFromJoystick;
+	
+	
+	
+	//FOR TESTING, DELETE THIS
+	public static double testAngle = 90;
+	public static double initTestAngle = 90;
+	public static double offset = 0;
+	public int counter = 0;
+	public double lastTime;
+	public double startTime;
+	
 
 
 	/*
@@ -76,7 +90,8 @@ public class Robot extends TimedRobot {
 
 		ahrs = new AHRS(SPI.Port.kMXP);
 		
-		
+		testAngle = 90;
+		startTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -86,11 +101,21 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		lastTime = System.currentTimeMillis();
+		offset = 1000*(testAngle-initTestAngle)/(lastTime-startTime);
+		testAngle = 90;
+		initTestAngle = 90;
 	}
 
 	@Override
 	public void disabledPeriodic() {
+		counter ++;
+		
+		if(counter % 25 == 0) {
+			//System.out.println("TestAngle: " + testAngle);
+		}
+		testAngle += ((-ahrs.getRawGyroX()-offset) * ((System.currentTimeMillis() - lastTime)/1000));
+		lastTime = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 	}
 
@@ -145,6 +170,12 @@ public class Robot extends TimedRobot {
         		}
         	}
         }
+        m_autonomousCommand = new CenterStartLeftSideGoal();
+        
+        lastTime = System.currentTimeMillis();
+		offset = 1000*(testAngle-initTestAngle)/(lastTime-startTime);
+		testAngle = 90;
+		initTestAngle = 90;
         
         // Start autonomous
 		if (m_autonomousCommand != null) {
@@ -157,6 +188,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		//System.out.println("\nGyro X: " + ahrs.getRawGyroX()+ "\nGyro Y: " + ahrs.getRawGyroY()+ "\nGyro Z: " + ahrs.getRawGyroZ());
+		
+		//System.out.println("TestAngle: " + testAngle);
+		
+		testAngle += ((-ahrs.getRawGyroX()-offset) * ((System.currentTimeMillis() - lastTime)/1000));
+		lastTime = System.currentTimeMillis();
+		
 		Scheduler.getInstance().run();
 	}
 
@@ -172,6 +210,12 @@ public class Robot extends TimedRobot {
 
 		driveFromJoystick = new DriveFromJoystick();
 		driveFromJoystick.start();
+		
+
+		lastTime = System.currentTimeMillis();
+		offset = 1000*(testAngle-initTestAngle)/(lastTime-startTime);
+		testAngle = 90;
+		initTestAngle = 90;
 	}
 
 	/**
@@ -179,11 +223,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//System.out.println("\nGyro X: " + ahrs.getRoll()+ "\nGyro Y: " + ahrs.getPitch()+ "\nGyro Z: " + ahrs.getYaw());
+		counter ++;
+		//System.out.println("\nGyro X: " + ahrs.getRawGyroX()+ "\nGyro Y: " + ahrs.getRawGyroY()+ "\nGyro Z: " + ahrs.getRawGyroZ());
+		
+		if(counter % 25 == 0) {
+			//System.out.println("TestAngle: " + testAngle);
+		}
+		
+		testAngle += ((-ahrs.getRawGyroX()-offset) * ((System.currentTimeMillis() - lastTime)/1000));
+		lastTime = System.currentTimeMillis();
+		
 		Scheduler.getInstance().run();
-		System.out.print(ahrs.getYaw());
-		System.out.print(ahrs.getPitch());
-		System.out.print(ahrs.getRoll());
 	}
 
 	/**

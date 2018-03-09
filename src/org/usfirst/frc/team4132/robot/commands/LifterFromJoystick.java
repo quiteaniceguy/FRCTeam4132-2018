@@ -6,7 +6,8 @@ import org.usfirst.frc.team4132.robot.XboxControllerMap;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LifterFromJoystick extends Command{
-	private final double LIFTER_CAP = .8;
+	private final double LIFTER_CAP_UP = .8;
+	private final double LIFTER_CAP_DOWN = .3;
 	private final double INVERT_LIFT_CONTROLLER = -1;
 	
 	
@@ -32,7 +33,13 @@ public class LifterFromJoystick extends Command{
 			lifterSpeed = lifterRaiseSpeed;
 		}
 		*/
-		lifterSpeed = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.RIGHT_JOY_Y) * LIFTER_CAP * INVERT_LIFT_CONTROLLER;
+		lifterSpeed = Robot.m_oi.stickOne.getRawAxis(XboxControllerMap.RIGHT_JOY_Y);
+		if(lifterSpeed > 0) {
+			lifterSpeed = lifterSpeed * LIFTER_CAP_DOWN * INVERT_LIFT_CONTROLLER;
+		}
+		else {
+			lifterSpeed = lifterSpeed * LIFTER_CAP_UP * INVERT_LIFT_CONTROLLER;
+		}
 		Robot.lifterSystem.setSpeed(lifterSpeed);
 		
 	}

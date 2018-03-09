@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveFromJoystick extends Command{
-	private final double DRIVE_SPEED = 1d;
+	private final double DRIVE_SPEED = .8d;
 	private int invert = -1;
 	private double currSpeed = 0;
 	private double desiredSpeed = 0;

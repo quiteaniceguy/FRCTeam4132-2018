@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class EncoderSystem extends Subsystem{
 	
-	public final double DISTANCE_RATE = 10101;
+	public final double DISTANCE_RATE = 6*Math.PI/1440;
 	
 	public Encoder encoder;
 	
 	public EncoderSystem() {
 		encoder = new Encoder(RobotMap.leftEncoderOne, RobotMap.leftEncoderTwo);
-		
+		encoder.setDistancePerPulse(DISTANCE_RATE);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class EncoderSystem extends Subsystem{
 	/* use this to convert count into a real distance */
 	public double getDistance() {
 		///must make distanc
-		return Math.abs(DISTANCE_RATE * encoder.get());
+		return encoder.getDistance();
 	}
 	
 	public void distanceReset() {
